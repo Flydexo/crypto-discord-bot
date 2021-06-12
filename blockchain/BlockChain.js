@@ -1,11 +1,18 @@
 const Block = require('./Block');
 const Transaction = require('./Transaction');
+const fs = require("fs");
+const path = require('path');
 
 class Blockchain{
     constructor(){
-        this.chain = [this.createGenesisBlock()];
+        let data = JSON.parse(fs.readFileSync(path.join(__dirname, "./database/Blockchain.json")));
+        if(data.length < 1){
+            this.chain = [this.createGenesisBlock()];
+        }else{
+            this.chain = data;
+        }
         this.pendingTransactions = [];
-        this.reward = 100000000;
+        this.reward = 0.01;
         this.difficulty = 2;
     }
 
@@ -21,12 +28,21 @@ class Blockchain{
         let block = new Block(this.pendingTransactions, Date.now(), this.chain[this.chain.length - 1].hash);
         block.mine(this.difficulty);
         this.chain.push(block);
+        const data = JSON.parse(fs.readFileSync(path.join(__dirname, "./database/Blockchain.json")));
+        data.push(this.chain[this.chain.length - 1]);
+        fs.writeFileSync(path.join(__dirname, "./database/Blockchain.json"), JSON.stringify(data, null, 2), (err) => {
+            if(err) throw err;
+        })
         this.pendingTransactions = [
             new Transaction(null, miningRewardAddress, this.reward)
         ];
     }
 
     addTransaction(transaction){
+        if(this.getBalance(transaction.from) < transaction.amount){
+            return "insufficient funds";
+        }
+
         if(!transaction.from || !transaction.to){
             throw "from and to address"
         }
@@ -36,6 +52,7 @@ class Blockchain{
         }
 
         this.pendingTransactions.push(transaction);
+        console.log(transaction);
     }
 
     getBalance(address){
@@ -47,6 +64,13 @@ class Blockchain{
                 }else if(address == trans.to){
                     balance += trans.amount;
                 }
+            }
+        }
+        for(const transaction of this.pendingTransactions){
+            if(address == transaction.from){
+                balance -= transaction.amount;
+            }else if(address == transaction.to){
+                balance += transaction.amount;
             }
         }
         return balance;

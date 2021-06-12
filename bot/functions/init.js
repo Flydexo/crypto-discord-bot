@@ -25,7 +25,18 @@ const initCommands = (client) => {
     })
 }
 
+const initWallets = (client) => {
+    const data = JSON.parse(fs.readFileSync(path.join(__dirname, "../data/users.json")));
+    client.wallets = new Collection();
+    if(data.length > 0){
+        data.forEach(u => {
+            client.wallets.set(u.id, u.address);
+        })
+    }
+}
+
 module.exports = {
     initEvents,
-    initCommands
+    initCommands,
+    initWallets
 }

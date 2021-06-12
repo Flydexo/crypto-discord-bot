@@ -1,8 +1,11 @@
 const DISCORD = require('discord.js');
+const { TOKEN } = require('./config.js');
 const client = new DISCORD.Client();
 
-const {initEvents, initCommands} = require('./functions/init.js');
+const {initEvents, initCommands, initWallets} = require('./functions/init.js');
+process.env.messageCount = 0;
 initEvents(client);
 initCommands(client);
+initWallets(client);
 
-client.login('ODUzMTYxNjA2MDg2MzkzODY2.YMRWqQ.2cnFAAAL7ePKVJuJV3DonWUP7jw');
+client.login(TOKEN);
