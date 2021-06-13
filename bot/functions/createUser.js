@@ -3,7 +3,8 @@ const path = require("path");
 const createUser = (user, address) => {
     const userObj = {
         id: user.id,
-        address: address
+        address: address,
+        dWallet: 100
     };
     const data = JSON.parse(fs.readFileSync(path.join(__dirname, '../data/users.json')));
     data.push(userObj);

@@ -1,6 +1,7 @@
 const Block = require('./Block');
 const BlockChain = require('./BlockChain');
 const Transaction = require("./Transaction");
+const Currency = require("./Currency");
 
 // const myKey = ec.keyFromPrivate('865341fe77414a5403bcecda9ea10d52f7a2d65b4ba3733483aa5343c977b3f2');
 // const address = myKey.getPublic('hex');
@@ -8,6 +9,7 @@ const Transaction = require("./Transaction");
 // const toAddress = toKey.getPublic('hex');
 
 const EKIP = new BlockChain();
+const EKP = new Currency();
 
 // ekip.minePendingTransaction(address);
 
@@ -17,4 +19,7 @@ const EKIP = new BlockChain();
 // ekip.minePendingTransaction("miner");
 // console.log(ekip.chain);
 
-module.exports = EKIP;
+module.exports = {
+    EKIP,
+    EKP
+};

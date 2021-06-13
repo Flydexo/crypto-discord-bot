@@ -5,7 +5,7 @@ module.exports = (client, messageReaction, user) => {
     if(messageReaction.message.content == "🛑 Do you want to create a user ? If done your old user will be deleted if you have one"){
         if(messageReaction.emoji.toString() == "✅"){
             const keys = generateKeys();
-            messageReaction.message.channel.send(`This is your private key (do not share it) ||${keys.private}|| and your public key ${keys.public}`);
+            messageReaction.message.channel.send(`This is your private key (do not share it) ||${keys.private}|| and your public key \`${keys.public}\``);
             createUser(user, keys.public);
             client.wallets.set(user.id, keys.public);
             return messageReaction.message.delete();
