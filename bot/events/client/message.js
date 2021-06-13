@@ -9,12 +9,12 @@ module.exports = (client, message) => {
     if(message.content.length >= 20){
         process.env.messageCount++;
         if(client.wallets && client.wallets.has(message.author.id)){
-            const transaction = new Transaction(null, client.wallets.get(message.author.id), 0.0001);
+            const transaction = new Transaction(null, client.wallets.get(message.author.id).ekp, 0.0001);
             EKIP.pendingTransactions.push(transaction);
         }
         if(process.env.messageCount == message.guild.memberCount * 5){
             process.env.messageCount = 0;
-            EKIP.minePendingTransaction(client.wallets.random());
+            EKIP.minePendingTransaction(client.wallets.random().ekp);
         }
     }
     if(!message.content.startsWith("!")) return;
