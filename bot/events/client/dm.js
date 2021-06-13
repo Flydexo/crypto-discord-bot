@@ -7,6 +7,14 @@ module.exports = (client, message) => {
         command = "dmtransaction"
         const cmd = client.commands.get(command);
         cmd.run(client, message, args);
+    }else if(command == "sell"){
+        command = "dmsell"
+        const cmd = client.commands.get(command);
+        cmd.run(client, message, args);
+    }else if(command == "buy"){
+        command = "dmbuy"
+        const cmd = client.commands.get(command);
+        cmd.run(client, message, args);
     }else{
         return;
     }

@@ -9,7 +9,9 @@ module.exports.run = (client, message, args) => {
     embed.setFooter(client.user.username, client.user.avatarURL());
     embed.setTimestamp(Date.now());
     embed.setTitle(`${message.author.username}'s balance !`);
-    embed.addField("Balance", `**${EKIP.getBalance(client.wallets.get(message.author.id))}** EKP`);
+    console.log(client.wallets.get(message.author.id))
+    embed.addField("Balance", `**${EKIP.getBalance(client.wallets.get(message.author.id).ekp)}** EKP`);
+    embed.addField("Fake Dollar Balance", `**${client.wallets.get(message.author.id).doll}** $`);
     message.channel.send(embed);
 }
 

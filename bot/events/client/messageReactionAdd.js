@@ -7,7 +7,7 @@ module.exports = (client, messageReaction, user) => {
             const keys = generateKeys();
             messageReaction.message.channel.send(`This is your private key (do not share it) ||${keys.private}|| and your public key \`${keys.public}\``);
             createUser(user, keys.public);
-            client.wallets.set(user.id, keys.public);
+            client.wallets.set(user.id, {ekp: keys.public, doll: 100});
             return messageReaction.message.delete();
         }else {
             messageReaction.message.channel.send("Goodbye ! 👋");

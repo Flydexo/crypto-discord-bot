@@ -30,13 +30,31 @@ const initWallets = (client) => {
     client.wallets = new Collection();
     if(data.length > 0){
         data.forEach(u => {
-            client.wallets.set(u.id, u.address);
+            client.wallets.set(u.id, {ekp: u.address, doll: u.dWallet});
         })
+    }
+}
+
+const initSells = (client) => {
+    const data = JSON.parse(fs.readFileSync(path.join(__dirname, "../data/market.json"))).sells;
+    client.sells = new Collection();
+    for(sell of data){
+        client.sells.set(data.seller, {price: data.price, privateKey: data.privateKey, publicKey: data.publicKey, amount: data.amount});
+    }
+}
+
+const initBuys = (client) => {
+    const data = JSON.parse(fs.readFileSync(path.join(__dirname, "../data/market.json"))).buys;
+    client.buys = new Collection();
+    for(buy of data){
+        client.buys.set(data.buyer, {price: data.price, publicKey: data.publicKey, amount: data.amount});
     }
 }
 
 module.exports = {
     initEvents,
     initCommands,
-    initWallets
+    initWallets,
+    initSells,
+    initBuys
 }

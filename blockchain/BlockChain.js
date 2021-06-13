@@ -17,7 +17,7 @@ class Blockchain{
     }
 
     createGenesisBlock(){
-        return new Block([], Date.now(), "0");
+        return new Block([new Transaction(null, "048d02c356d369824eaa7ae9a80fc08fd8e5044cd1300b7fdfab25e7c9e425b7203fea2e8728596bdbbdf9e3c2faf61005d4fa24d6ad7a24eba1c368ed95e54b30", 1000000)], Date.now(), "0");
     }
 
     getLastBlock(){
