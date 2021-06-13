@@ -1,19 +1,21 @@
 const {MessageEmbed} = require("discord.js");
-const {EKIP} = require("../../../blockchain/index");
+const {EKIP} = require("../../index");
 const fs = require("fs");
 const path = require("path");
 
 module.exports.run = (client, message, args) => {
     const market = JSON.parse(fs.readFileSync(path.join(__dirname, "../../data/market.json")));
     let sells = [];
-    market.sells.forEach(sell => {
-        sells.push(`**${sell.price}$** - **${sell.amount} EKP** \n Proposed by: ${message.guild.members.cache.get(sell.seller)}`)
-    })
+    market.sells.forEach((sell, index) => {
+        if(index > 5) return;
+        sells.push(`Price: **${sell.price} USDT** Amount: **${sell.amount} EKP**  Total: **${sell.total} USDT** Sum: **${sell.sum} USDT**`);
+    });
     if(market.sells.length < 1) sells[0] = "nothing";
     let buys = [];
-    market.buys.forEach(buy => {
-        sells.push(`**${buy.amount} EKP** - **${buy.price}$** \n Asked by: ${message.guild.members.cache.get(sell.buyer)}`)
-    })
+    market.buys.forEach((buy, index) => {
+        if(index > 5) return;
+        buys.push(`Price: **${buy.price} USDT** Amount: **${buy.amount} EKP**  Total: **${buy.total} USDT** Sum: **${buy.sum} USDT**`);
+    });
     if(market.buys.length < 1) buys[0] = "nothing";
     const embed = new MessageEmbed();
     embed.setAuthor(message.author.username, message.author.avatarURL());
@@ -22,8 +24,8 @@ module.exports.run = (client, message, args) => {
     embed.setFooter(client.user.username, client.user.avatarURL());
     embed.setTimestamp(Date.now());
     embed.setTitle(`EKIP Market`);
-    embed.addField("Buys", buys.join('\n'));
-    embed.addField("Sells", sells.join("\n"));
+    embed.addField("Buys", buys.join('\n\n'));
+    embed.addField("Sells", sells.join("\n\n"));
     message.channel.send(embed);
 }
 

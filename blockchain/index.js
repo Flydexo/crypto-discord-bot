@@ -8,9 +8,6 @@ const Currency = require("./Currency");
 // const toKey = ec.keyFromPrivate('635047c0cc699ffafd0820d62fd842b57ba0207b2631eca64cd04644c9528057');
 // const toAddress = toKey.getPublic('hex');
 
-const EKIP = new BlockChain();
-const EKP = new Currency();
-
 // ekip.minePendingTransaction(address);
 
 // const tx1 = new Transaction(address, toAddress, 667000);
@@ -18,8 +15,3 @@ const EKP = new Currency();
 // ekip.addTransaction(tx1);
 // ekip.minePendingTransaction("miner");
 // console.log(ekip.chain);
-
-module.exports = {
-    EKIP,
-    EKP
-};

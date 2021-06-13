@@ -1,25 +1,28 @@
 const {MessageEmbed} = require("discord.js");
-const {EKP} = require("../../../blockchain/index");
+const {EKP} = require("../../index");
 const {addSell} = require("../../functions/market.js");
 
 module.exports.run = (client, message, args) => {
-    const amount = args[1];
+    const amount = parseFloat(args[1]);
     const privateKey = args[0];
     const exchangeType = args[2];
     const seller = client.wallets.get(message.author.id).ekp;
-    if(seller.ekp < amount) return message.reply("Insuficient funds !");
+    if(seller < amount) return message.reply("Insuficient funds !");
     if(!exchangeType) return message.reply("Please enter an exchange type");
     if(exchangeType == "market" || !isNaN(parseFloat(exchangeType))){
         const price = exchangeType == "market" ? EKP.getValue("$") : exchangeType;
+        const total = price * amount;
         const sell = {
-            seller: message.author.id,
             price: price,
+            amount: amount,
+            total: total,
+            sum: total,
             privateKey: privateKey,
-            publicKey: seller,
-            amount: amount
+            seller: seller
         };
         addSell(sell);
-        client.sells.set(message.author.id, {price: price, privateKey: privateKey, publicKey: seller, amount: amount});
+        console.log(sell, "aaaa")
+        client.sells.set(seller, {price: price, amount: amount, total: total, sum: total, privateKey: privateKey, id: sell.id});
         return message.reply("Sell added !");
     }else{
         return message.reply("Please enter a valid exchange type")

@@ -1,5 +1,5 @@
 const {MessageEmbed} = require("discord.js");
-const {EKIP} = require("../../../blockchain/index");
+const {EKIP} = require("../../index");
 
 module.exports.run = (client, message, args) => {
     const embed = new MessageEmbed();

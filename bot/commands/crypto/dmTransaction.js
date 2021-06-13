@@ -1,5 +1,5 @@
 const {MessageEmbed} = require("discord.js");
-const {EKIP} = require("../../../blockchain/index");
+const {EKIP} = require("../../index");
 const EC = require("elliptic").ec;
 const ec = new EC('secp256k1');
 const Transaction = require('../../../blockchain/Transaction')

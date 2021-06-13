@@ -39,7 +39,7 @@ const initSells = (client) => {
     const data = JSON.parse(fs.readFileSync(path.join(__dirname, "../data/market.json"))).sells;
     client.sells = new Collection();
     for(sell of data){
-        client.sells.set(data.seller, {price: data.price, privateKey: data.privateKey, publicKey: data.publicKey, amount: data.amount});
+        client.sells.set(sell.seller, {price: sell.price, amount: sell.amount, total: sell.total, sum: sell.sum, privateKey: sell.privateKey, id: sell.id});
     }
 }
 
@@ -47,7 +47,7 @@ const initBuys = (client) => {
     const data = JSON.parse(fs.readFileSync(path.join(__dirname, "../data/market.json"))).buys;
     client.buys = new Collection();
     for(buy of data){
-        client.buys.set(data.buyer, {price: data.price, publicKey: data.publicKey, amount: data.amount});
+        client.buys.set(buy.buyer, {price: buy.price, amount: buy.amount, total: buy.total, sum: buy.sum});
     }
 }
 

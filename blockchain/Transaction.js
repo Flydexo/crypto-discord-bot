@@ -15,7 +15,6 @@ class Transaction{
 
     sign(signingKey){
         if(signingKey.getPublic('hex') !== this.from){
-            console.log(this.from);
             throw "you cannot use other key";
         }
         const hashTx = this.hash();

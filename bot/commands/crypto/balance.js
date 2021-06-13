@@ -1,5 +1,5 @@
 const {MessageEmbed} = require("discord.js");
-const {EKIP} = require("../../../blockchain/index");
+const {EKIP} = require("../../index");
 
 module.exports.run = (client, message, args) => {
     const embed = new MessageEmbed();
@@ -9,7 +9,6 @@ module.exports.run = (client, message, args) => {
     embed.setFooter(client.user.username, client.user.avatarURL());
     embed.setTimestamp(Date.now());
     embed.setTitle(`${message.author.username}'s balance !`);
-    console.log(client.wallets.get(message.author.id))
     embed.addField("Balance", `**${EKIP.getBalance(client.wallets.get(message.author.id).ekp)}** EKP`);
     embed.addField("Fake Dollar Balance", `**${client.wallets.get(message.author.id).doll}** $`);
     message.channel.send(embed);
