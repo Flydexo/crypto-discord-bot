@@ -8,7 +8,7 @@ module.exports.run = (client, message, args) => {
     const buyer = client.wallets.get(message.author.id);
     if(!exchangeType) return message.reply("Please enter an exchange type");
     if(exchangeType == "market" || !isNaN(parseFloat(exchangeType))){
-        const price = exchangeType == "market" ? EKP.getValue("$") : parseFloat(exchangeType);
+        const price = exchangeType == "market" ? EKP.getValue() : parseFloat(exchangeType);
         const total = price * amount;
         if(buyer.doll < total) return message.reply("Insuficient funds !");
         const buy = {

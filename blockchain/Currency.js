@@ -1,11 +1,28 @@
 const Value = require("./Value");
+const fs = require('fs');
+const path = require("path");
 
 class Currency{
 
-    getValue(money){
-        if(money == "$"){
-            return 0.00999
-        }
+    constructor(){
+        this.value = this.getValueFromJson();
+    }
+
+    getValue(){
+        return this.value;
+    }
+
+    getValueFromJson(){
+        return JSON.parse(fs.readFileSync(path.join(__dirname, "../database/Currency.json"))).value;
+    }
+
+    setValue(value){
+        this.value = value;
+        const data = JSON.parse(fs.readFileSync(path.join(__dirname, "../database/Currency.json")));
+        data.value = this.value;
+        fs.writeFileSync(path.join(__dirname, "../database/Currency.json"), JSON.stringify(data, null, 2), err => {
+            if(err) throw err;
+        })
     }
 
     getPercentage(){
