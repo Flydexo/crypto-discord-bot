@@ -21,7 +21,6 @@ module.exports.run = (client, message, args) => {
             seller: seller
         };
         addSell(sell);
-        console.log(sell, "aaaa")
         client.sells.set(seller, {price: price, amount: amount, total: total, sum: total, privateKey: privateKey, id: sell.id});
         return message.reply("Sell added !");
     }else{

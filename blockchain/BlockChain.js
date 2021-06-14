@@ -7,20 +7,17 @@ class Blockchain{
     constructor(){
         let data = JSON.parse(fs.readFileSync(path.join(__dirname, "./database/Blockchain.json")));
         if(data.length < 1){
-            console.log("chain < 1");
             this.chain = [this.createGenesisBlock()];
         }else{
-            console.log("chain > 1");
             this.chain = data;
         }
-        console.log(this.chain);
         this.pendingTransactions = [];
         this.reward = 0.01;
         this.difficulty = 2;
     }
 
     createGenesisBlock(){
-        return new Block([new Transaction(null, "048d02c356d369824eaa7ae9a80fc08fd8e5044cd1300b7fdfab25e7c9e425b7203fea2e8728596bdbbdf9e3c2faf61005d4fa24d6ad7a24eba1c368ed95e54b30", 1000000)], Date.now(), "0");
+        return new Block([new Transaction(null, "04fbf1875b822ad244c427f7739e95a8adfb8616abc1a1f5134ad766f4dcb61188826cf38dad7bf7c24c9a8a94e02204862293c4c35b1bf58f5d77e05fc00e1905", 1000000)], Date.now(), "0");
     }
 
     getLastBlock(){
@@ -31,7 +28,6 @@ class Blockchain{
         let block = new Block(this.pendingTransactions, Date.now(), this.chain[this.chain.length - 1].hash);
         block.mine(this.difficulty);
         this.chain.push(block);
-        console.log(this.chain);
         let data = JSON.parse(fs.readFileSync(path.join(__dirname, "./database/Blockchain.json")));
         data = this.chain;
         fs.writeFileSync(path.join(__dirname, "./database/Blockchain.json"), JSON.stringify(data, null, 2), (err) => {
