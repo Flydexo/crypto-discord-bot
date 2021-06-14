@@ -1,5 +1,5 @@
 const {MessageEmbed} = require("discord.js");
-const {EKIP} = require("../../../blockchain/index");
+const {EKIP} = require("../../index");
 const EC = require("elliptic").ec;
 const ec = new EC('secp256k1');
 const Transaction = require('../../../blockchain/Transaction')
@@ -18,6 +18,7 @@ module.exports.run = (client, message, args) => {
     transaction.sign(from);
     let result = EKIP.addTransaction(transaction);
     if(result == "insufficient funds") return message.reply('Insufficien funds !');
+    return message.reply("Transaction added to pending transactions (wait the next block to be added to notice the transaction)");
 }
     
 module.exports.help = {

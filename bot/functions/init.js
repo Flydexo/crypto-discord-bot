@@ -1,6 +1,7 @@
 const fs = require("fs");
 const path = require('path');
 const {Collection} = require('discord.js');
+const buy = require("../events/client/buy");
 
 const initEvents = (client) => {
     const categories = fs.readdirSync("./bot/events/");
@@ -30,13 +31,31 @@ const initWallets = (client) => {
     client.wallets = new Collection();
     if(data.length > 0){
         data.forEach(u => {
-            client.wallets.set(u.id, {ekp: u.wallet, doll: u.amount});
+            client.wallets.set(u.id, {ekp: u.address, doll: u.dWallet});
         })
+    }
+}
+
+const initSells = (client) => {
+    const data = JSON.parse(fs.readFileSync(path.join(__dirname, "../data/market.json"))).sells;
+    client.sells = new Collection();
+    for(sell of data){
+        client.sells.set(sell.id, {price: sell.price, amount: sell.amount, total: sell.total, sum: sell.sum, privateKey: sell.privateKey, id: sell.id, publicKey: sell.seller});
+    }
+}
+
+const initBuys = (client) => {
+    const data = JSON.parse(fs.readFileSync(path.join(__dirname, "../data/market.json"))).buys;
+    client.buys = new Collection();
+    for(let buy of data){
+        client.buys.set(buy.id, {price: buy.price, amount: buy.amount, total: buy.total, sum: buy.sum, id: buy.id, publicKey: buy.buyer});
     }
 }
 
 module.exports = {
     initEvents,
     initCommands,
-    initWallets
+    initWallets,
+    initSells,
+    initBuys
 }

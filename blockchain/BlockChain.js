@@ -17,7 +17,7 @@ class Blockchain{
     }
 
     createGenesisBlock(){
-        return new Block([], Date.now(), "0");
+        return new Block([new Transaction(null, "04fbf1875b822ad244c427f7739e95a8adfb8616abc1a1f5134ad766f4dcb61188826cf38dad7bf7c24c9a8a94e02204862293c4c35b1bf58f5d77e05fc00e1905", 1000000)], Date.now(), "0");
     }
 
     getLastBlock(){
@@ -28,8 +28,8 @@ class Blockchain{
         let block = new Block(this.pendingTransactions, Date.now(), this.chain[this.chain.length - 1].hash);
         block.mine(this.difficulty);
         this.chain.push(block);
-        const data = JSON.parse(fs.readFileSync(path.join(__dirname, "./database/Blockchain.json")));
-        data.push(this.chain[this.chain.length - 1]);
+        let data = JSON.parse(fs.readFileSync(path.join(__dirname, "./database/Blockchain.json")));
+        data = this.chain;
         fs.writeFileSync(path.join(__dirname, "./database/Blockchain.json"), JSON.stringify(data, null, 2), (err) => {
             if(err) throw err;
         })
@@ -52,7 +52,6 @@ class Blockchain{
         }
 
         this.pendingTransactions.push(transaction);
-        console.log(transaction);
     }
 
     getBalance(address){
@@ -66,13 +65,13 @@ class Blockchain{
                 }
             }
         }
-        for(const transaction of this.pendingTransactions){
-            if(address == transaction.from){
-                balance -= transaction.amount;
-            }else if(address == transaction.to){
-                balance += transaction.amount;
-            }
-        }
+        // for(const transaction of this.pendingTransactions){
+        //     if(address == transaction.from){
+        //         balance -= transaction.amount;
+        //     }else if(address == transaction.to){
+        //         balance += transaction.amount;
+        //     }
+        // }
         return balance;
     }
 

@@ -12,7 +12,6 @@ const createUser = (user, address) => {
         if(err){
             console.error(err);
         }
-        console.log("user created");
     })
 }
 

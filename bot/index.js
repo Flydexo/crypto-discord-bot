@@ -1,11 +1,17 @@
 const DISCORD = require('discord.js');
 const { TOKEN } = require('./config.js');
 const client = new DISCORD.Client();
+const Blockchain = require("../blockchain/BlockChain");
+const Currency = require("../blockchain/Currency");
 
-const {initEvents, initCommands, initWallets} = require('./functions/init.js');
+module.exports.EKIP = new Blockchain();
+module.exports.EKP = new Currency();
+const {initEvents, initCommands, initWallets, initSells, initBuys} = require('./functions/init.js');
 process.env.messageCount = 0;
 initEvents(client);
 initCommands(client);
 initWallets(client);
+initSells(client);
+initBuys(client);
 
 client.login(TOKEN);
