@@ -10,7 +10,7 @@ module.exports.run = (client, message, args) => {
     if(seller < amount) return message.reply("Insuficient funds !");
     if(!exchangeType) return message.reply("Please enter an exchange type");
     if(exchangeType == "market" || !isNaN(parseFloat(exchangeType))){
-        const price = exchangeType == "market" ? EKP.getValue("$") : exchangeType;
+        const price = exchangeType == "market" ? EKP.getValue("$") : parseFloat(exchangeType);
         const total = price * amount;
         const sell = {
             price: price,
@@ -21,7 +21,8 @@ module.exports.run = (client, message, args) => {
             seller: seller
         };
         addSell(sell);
-        client.sells.set(seller, {price: price, amount: amount, total: total, sum: total, privateKey: privateKey, id: sell.id});
+        client.sells.set(sell.id, {price: price, amount: amount, total: total, sum: total, privateKey: privateKey, id: sell.id, publicKey: seller});
+        client.emit('buy', "sell", sell);
         return message.reply("Sell added !");
     }else{
         return message.reply("Please enter a valid exchange type")

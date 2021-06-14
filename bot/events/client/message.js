@@ -1,14 +1,12 @@
 const {EKIP} = require("../../index");
-const Transaction = require('../../../blockchain/Transaction')
-const EC = require("elliptic").ec;
-const ec = new EC('secp256k1');
+const {memberMultiplier, messageLength} = require('../../config');
 
 module.exports = (client, message) => {
     if(message.author.bot) return;
     if(message.channel.type == "dm") return client.emit('dm', message);
-    if(message.content.length >= 2){
+    if(message.content.length >= messageLength){
         process.env.messageCount++;
-        if(process.env.messageCount == message.guild.memberCount * 1){
+        if(process.env.messageCount == message.guild.memberCount * memberMultiplier){
             process.env.messageCount = 0;
             EKIP.minePendingTransaction(client.wallets.random().ekp);
         }

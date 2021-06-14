@@ -3,23 +3,40 @@ const Transaction = require("../../../blockchain/Transaction");
 const EC = require("elliptic").ec;
 const ec = new EC('secp256k1');
 const {deleteSell, deleteBuy, addSell, updateDollars} = require("../../functions/market");
-module.exports = (client, buy) => {
+module.exports = (client, buy, sell = "") => {
+    if(buy == "sell"){
+        client.buys.filter(b => b.price == sell.price).filter(b => b.amount <= sell.amount).forEach(b => {
+            console.log(b);
+            client.emit("buy", b);
+        })
+        return;
+    }
+
     const orderToBuy = client.sells.filter(s => s.price == buy.price).filter(s => s.amount >= buy.amount).first();
     if(!orderToBuy) return;
+
+    const buyerWallet = client.wallets.filter(w => w.ekp == buy.publicKey).first(); 
+    updateDollars(buyerWallet.doll - buy.total, buyerWallet.ekp);
+    client.wallets.filter(w => w.ekp == buy.publicKey).first().doll = buyerWallet.doll - buy.total;
+
+    const sellerWallet = client.wallets.filter(w => w.ekp == ec.keyFromPrivate(orderToBuy.privateKey).getPublic('hex')).first(); 
+    updateDollars(sellerWallet.doll + buy.total, sellerWallet.ekp);
+    client.wallets.filter(w => w.ekp == ec.keyFromPrivate(orderToBuy.privateKey).getPublic('hex')).first().doll = sellerWallet.doll + buy.total;
+
     const from = ec.keyFromPrivate(orderToBuy.privateKey);
     const fromAddress = from.getPublic('hex');
-    const to = ec.keyFromPublic(buy.buyer, "hex");
+    const to = ec.keyFromPublic(buy.publicKey, "hex");
     const toAddress = to.getPublic('hex');
     const transaction = new Transaction(fromAddress, toAddress, buy.amount);
-    let dWallet = client.wallets.filter(w => w.ekp == buy.buyer).first(); 
-    updateDollars(dWallet.doll - buy.total, dWallet.ekp);
-    dWallet = client.wallets.filter(w => w.ekp == ec.keyFromPrivate(orderToBuy.privateKey).getPublic('hex')).first(); 
-    updateDollars(dWallet.doll + buy.total, dWallet.ekp);
-    console.log("seller: ", dWallet.doll + buy.total, dWallet.doll);
-    client.wallets.filter(w => w.ekp == buy.buyer).first().doll = dWallet.doll - buy.total;
-    client.wallets.filter(w => w.ekp == ec.keyFromPrivate(orderToBuy.privateKey).getPublic('hex')).first().doll = dWallet.doll + buy.total;
-    console.log(client.wallets.filter(w => w.ekp == ec.keyFromPrivate(orderToBuy.privateKey).getPublic('hex')).first());
-    console.log(orderToBuy.seller, " = seller");
+    transaction.sign(from);
+    EKIP.addTransaction(transaction);
+
+    client.sells.delete(orderToBuy.id);
+    console.log("buy id: ", buy);
+    client.buys.delete(buy.id);
+    deleteSell(orderToBuy);
+    deleteBuy(buy);
+
     if(buy.amount < orderToBuy.amount){
         const sell = {
             price: orderToBuy.price,
@@ -31,12 +48,6 @@ module.exports = (client, buy) => {
         };
         addSell(sell);
         client.sells.delete(sell.seller);
-        client.sells.set(sell.seller, {price: sell.price, amount: sell.amount, total: sell.total, sum: sell.total, privateKey: sell.privateKey, id: sell.id});
+        client.sells.set(sell.id, {price: sell.price, amount: sell.amount, total: sell.total, sum: sell.total, privateKey: sell.privateKey, id: sell.id});
     }
-    transaction.sign(from);
-    EKIP.addTransaction(transaction);
-    client.sells.delete(orderToBuy.seller);
-    client.buys.delete(buy.buyer);
-    deleteSell(orderToBuy);
-    deleteBuy(buy);
 }

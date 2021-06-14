@@ -19,7 +19,7 @@ module.exports.run = (client, message, args) => {
             sum: total
         };
         addBuy(buy);
-        client.buys.set(buyer.ekp, {price: price, amount: amount, total: total, sum: total, publicKey: buyer.ekp, id: buy.id});
+        client.buys.set(buyer.ekp, {price: price, amount: amount, total: total, sum: total, publicKey: buyer.ekp, id: buy.id, publicKey: buyer.ekp});
         client.emit("buy", buy);
         return message.reply("Buy added !");
     }else{
