@@ -57,10 +57,19 @@ const updateDollars = (dollars, address) => {
     })
 }
 
+const addTrade = (trade) => {
+    const data = JSON.parse(fs.readFileSync(path.join(__dirname, '../data/trades.json')));
+    data.push(trade);
+    fs.writeFileSync(path.join(__dirname, '../data/trades.json'), JSON.stringify(data, null, 2), err => {
+        if(err) console.error(err);
+    })
+}
+
 module.exports = {
     addSell,
     addBuy,
     deleteSell,
     deleteBuy,
-    updateDollars
+    updateDollars,
+    addTrade
 }

@@ -52,10 +52,19 @@ const initBuys = (client) => {
     }
 }
 
+const initTrades = (client) => {
+    const data = JSON.parse(fs.readFileSync(path.join(__dirname, "../data/trades.json")));
+    client.trades = [];
+    for(let trade of data){
+        client.trades.push({timestamp: trade.timestamp, price: trade.price});
+    }
+}
+
 module.exports = {
     initEvents,
     initCommands,
     initWallets,
     initSells,
-    initBuys
+    initBuys,
+    initTrades
 }

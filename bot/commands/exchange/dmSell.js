@@ -1,5 +1,5 @@
 const {MessageEmbed} = require("discord.js");
-const {EKP} = require("../../index");
+const {EKP, EKIP} = require("../../index");
 const {addSell} = require("../../functions/market.js");
 
 module.exports.run = (client, message, args) => {
@@ -7,7 +7,7 @@ module.exports.run = (client, message, args) => {
     const privateKey = args[0];
     const exchangeType = args[2];
     const seller = client.wallets.get(message.author.id).ekp;
-    if(seller < amount) return message.reply("Insuficient funds !");
+    if(EKIP.getBalance(seller) < amount) return message.reply("Insuficient funds !");
     if(!exchangeType) return message.reply("Please enter an exchange type");
     if(exchangeType == "market" || !isNaN(parseFloat(exchangeType))){
         const price = exchangeType == "market" ? EKP.getValue() : parseFloat(exchangeType);

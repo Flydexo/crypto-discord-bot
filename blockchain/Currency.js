@@ -6,6 +6,7 @@ class Currency{
 
     constructor(){
         this.value = this.getValueFromJson();
+        this.marketValue = this.getMarketValueFromJson();
     }
 
     getValue(){
@@ -18,8 +19,25 @@ class Currency{
 
     setValue(value){
         this.value = value;
-        const data = JSON.parse(fs.readFileSync(path.join(__dirname, "../database/Currency.json")));
+        const data = JSON.parse(fs.readFileSync(path.join(__dirname, "./database/Currency.json")));
         data.value = this.value;
+        fs.writeFileSync(path.join(__dirname, "./database/Currency.json"), JSON.stringify(data, null, 2), err => {
+            if(err) throw err;
+        })
+    }
+
+    getMarketValue(){
+        return this.marketValue;
+    }
+
+    getMarketValueFromJson(){
+        return JSON.parse(fs.readFileSync(path.join(__dirname, "./database/Currency.json"))).marketValue;
+    }
+
+    setMarketValue(value){
+        this.marketValue = value;
+        const data = JSON.parse(fs.readFileSync(path.join(__dirname, "./database/Currency.json")));
+        data.marketValue = this.value;
         fs.writeFileSync(path.join(__dirname, "../database/Currency.json"), JSON.stringify(data, null, 2), err => {
             if(err) throw err;
         })
