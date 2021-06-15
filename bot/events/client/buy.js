@@ -15,9 +15,9 @@ module.exports = (client, buy, sell = "") => {
     const orderToBuy = client.sells.filter(s => s.price == buy.price).filter(s => s.amount >= buy.amount).first();
     if(!orderToBuy) return;
 
-    const buyerWallet = client.wallets.filter(w => w.ekp == buy.publicKey).first(); 
+    const buyerWallet = client.wallets.filter(w => w.ekp == buy.buyer).first(); 
     updateDollars(buyerWallet.doll - buy.total, buyerWallet.ekp);
-    client.wallets.filter(w => w.ekp == buy.publicKey).first().doll = buyerWallet.doll - buy.total;
+    client.wallets.filter(w => w.ekp == buy.buyer).first().doll = buyerWallet.doll - buy.total;
 
     const sellerWallet = client.wallets.filter(w => w.ekp == ec.keyFromPrivate(orderToBuy.privateKey).getPublic('hex')).first(); 
     updateDollars(sellerWallet.doll + buy.total, sellerWallet.ekp);
@@ -25,7 +25,7 @@ module.exports = (client, buy, sell = "") => {
 
     const from = ec.keyFromPrivate(orderToBuy.privateKey);
     const fromAddress = from.getPublic('hex');
-    const to = ec.keyFromPublic(buy.publicKey, "hex");
+    const to = ec.keyFromPublic(buy.buyer, "hex");
     const toAddress = to.getPublic('hex');
     const transaction = new Transaction(fromAddress, toAddress, buy.amount);
     transaction.sign(from);

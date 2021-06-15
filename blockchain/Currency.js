@@ -13,7 +13,7 @@ class Currency{
     }
 
     getValueFromJson(){
-        return JSON.parse(fs.readFileSync(path.join(__dirname, "../database/Currency.json"))).value;
+        return JSON.parse(fs.readFileSync(path.join(__dirname, "./database/Currency.json"))).value;
     }
 
     setValue(value){
