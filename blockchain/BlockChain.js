@@ -75,6 +75,18 @@ class Blockchain{
         return balance;
     }
 
+    getAllCoins(){
+        let coins = 0;
+        for(const block of this.chain){
+            for(const trans of block.transactions){
+                if(trans.from == null){
+                    coins += trans.amount;
+                }
+            }
+        }
+        return coins;
+    }
+
     isChainValid(){
         for(let i = 1; i < this.chain.length; i++){
             const currentBlock = this.chain[i];

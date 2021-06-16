@@ -26,7 +26,9 @@ class Currency{
         })
     }
 
-    getMarketValue(){
+    getMarketValue(blockchain){
+        let value = blockchain.getAllCoins() * this.value;
+        this.setMarketValue(value);
         return this.marketValue;
     }
 
@@ -37,8 +39,8 @@ class Currency{
     setMarketValue(value){
         this.marketValue = value;
         const data = JSON.parse(fs.readFileSync(path.join(__dirname, "./database/Currency.json")));
-        data.marketValue = this.value;
-        fs.writeFileSync(path.join(__dirname, "../database/Currency.json"), JSON.stringify(data, null, 2), err => {
+        data.marketValue = value;
+        fs.writeFileSync(path.join(__dirname, "./database/Currency.json"), JSON.stringify(data, null, 2), err => {
             if(err) throw err;
         })
     }
