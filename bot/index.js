@@ -16,7 +16,7 @@ initWallets(client);
 initSells(client);
 initBuys(client);
 initTrades(client);
-// startIntervals();
+startIntervals();
 
 
 
