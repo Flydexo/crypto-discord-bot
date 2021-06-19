@@ -60,11 +60,24 @@ const initTrades = (client) => {
     }
 }
 
+const initInvites = (client, guildId) => {
+    client.invites = new Collection();
+    guild = client.guilds.cache.get(guildId);
+    guild.fetchInvites().then(invites => {
+        invites.forEach(ivt => {
+            if(ivt.inviter && ivt.uses){
+                client.invites.set(ivt.code, ivt);
+            }
+        })
+    })
+}
+
 module.exports = {
     initEvents,
     initCommands,
     initWallets,
     initSells,
     initBuys,
-    initTrades
+    initTrades,
+    initInvites
 }

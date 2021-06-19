@@ -8,5 +8,14 @@ module.exports = (client, member) => {
     embed.setFooter(client.user.username, client.user.avatarURL());
     embed.setTimestamp(Date.now());
     embed.setTitle(`Welcome ${member.displayName}`);
-    member.guild.channels.cache.get("853536856138711060").send(embed);
+    member.guild.channels.cache.get("855150382296203285").send(embed);
+
+    member.guild.fetchInvites().then(gInvite => {
+        const invite = gInvite.find(inv => client.invites.get(inv.code).uses < inv.uses);
+        // console.log(client.invites, gInvite);
+        if(invite){
+            client.invites.set(invite.code, invite);
+            client.emit("invite", invite);
+        }
+    })
 }
