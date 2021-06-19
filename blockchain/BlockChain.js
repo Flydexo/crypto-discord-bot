@@ -2,6 +2,7 @@ const Block = require('./Block');
 const Transaction = require('./Transaction');
 const fs = require("fs");
 const path = require('path');
+const Contract = require("./Contract");
 
 class Blockchain{
     constructor(){
@@ -14,6 +15,7 @@ class Blockchain{
         this.pendingTransactions = [];
         this.reward = 0.01;
         this.difficulty = 2;
+        this.pendingContracts = [];
     }
 
     createGenesisBlock(){
@@ -25,7 +27,7 @@ class Blockchain{
     }
 
     minePendingTransaction(miningRewardAddress){
-        let block = new Block(this.pendingTransactions, Date.now(), this.chain[this.chain.length - 1].hash);
+        let block = new Block(this.pendingTransactions, Date.now(), this.chain[this.chain.length - 1].hash, this.pendingContracts);
         block.mine(this.difficulty);
         this.chain.push(block);
         let data = JSON.parse(fs.readFileSync(path.join(__dirname, "./database/Blockchain.json")));
@@ -39,19 +41,26 @@ class Blockchain{
     }
 
     addTransaction(transaction){
-        if(this.getBalance(transaction.from) < transaction.amount){
-            return "insufficient funds";
-        }
+       if(transaction.from != null){
+            if(this.getBalance(transaction.from) < transaction.amount){
+                return "insufficient funds";
+            }
 
-        if(!transaction.from || !transaction.to){
-            throw "from and to address"
-        }
+            if(!transaction.from || !transaction.to){
+                throw "from and to address"
+            }
 
-        if(!transaction.isValid()){
-            throw "not valid"
-        }
+            if(!transaction.isValid()){
+                throw "not valid"
+            }
+       }
 
         this.pendingTransactions.push(transaction);
+    }
+
+    addContract(contract){
+        if(typeof contract != Contract) return;
+        this.pendingContracts.push(contract);
     }
 
     getBalance(address){
