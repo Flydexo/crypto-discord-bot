@@ -7,5 +7,6 @@ module.exports.run = (client, message, args) => {
 }
 
 module.exports.help = {
-    name: "sell"
+    name: "sell",
+    role: "855151242257891348"
 }

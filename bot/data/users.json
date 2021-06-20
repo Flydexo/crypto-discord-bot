@@ -2,11 +2,16 @@
   {
     "id": "381748591963799553",
     "address": "0431c1d99a2aef2c1d6ae9f698f65beadcb0d0b95fef5cb3e3befe18f189158c2ab97b90b765bf45d268e3c5ef186588c22fa39ad11a99318086621bafca1e6ed8",
-    "dWallet": 200
+    "dWallet": 199.97
   },
   {
     "id": "769993431828660224",
     "address": "045e0b5a738e7ec8c695c2f4a174cf660be5af12e2b5a1a542f50bdd587b8dae99a84b0084899b9e2c208407a052ff38fdee5c7f7439f604555d3b974d1ae65ddb",
-    "dWallet": 0
+    "dWallet": 0.03
+  },
+  {
+    "id": "769993431828660224",
+    "address": "04486d89c2af2d3859af8db95e418284287063006244fe8fcec4cbba55071acbd88b40fca77b4539a1d0ec557791c6b7fc6c86b12e79bb944f9f798b0182b94385",
+    "dWallet": 100
   }
 ]

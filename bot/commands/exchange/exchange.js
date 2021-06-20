@@ -1,7 +1,8 @@
-const {MessageEmbed} = require("discord.js");
+const {MessageEmbed, MessageAttachment} = require("discord.js");
 const {EKIP, EKP} = require("../../index");
 const fs = require("fs");
 const path = require("path");
+const { ChartJSNodeCanvas } = require('chartjs-node-canvas');
 
 module.exports.run = (client, message, args) => {
     const market = JSON.parse(fs.readFileSync(path.join(__dirname, "../../data/market.json")));
@@ -17,15 +18,17 @@ module.exports.run = (client, message, args) => {
         buys.push(`Price: **${buy.price} USDT** Amount: **${buy.amount} EKP**  Total: **${buy.total} USDT** Sum: **${buy.sum} USDT**`);
     });
     if(market.buys.length < 1) buys[0] = "nothing";
-    const percentage = EKP.getPercentage();
+    let percentage = EKP.getPercentage();
+    if(percentage < 100) percentage -= percentage * 2; 
+    console.log("percentage", percentage);
     const exchange = {
         title: "Trade Ekip (EKP)",
         description: `Here you can see the actual Ekip price and his evolution ${args[0]}`,
         image: "https://www.gizmotimes.com/wp-content/uploads/2018/02/Crypto-Graph.png",
         fields: [
             {
-                title: `${EKP.getValue()} ${percentage}%`,
-                description: `${EKP.getMarketValue()}$ market cap`
+                title: `${EKP.getValue()} USDT ${percentage}%`,
+                description: `${EKP.getMarketValue(EKIP)}$ market cap`
             },
             {
                 title: "Buys",
@@ -47,11 +50,8 @@ module.exports.run = (client, message, args) => {
         },
         timestamp: Date.now()
     }
-
-
     const embed = new MessageEmbed();
     embed.setAuthor(exchange.author.name, exchange.author.avatar);
-    embed.setImage(exchange.image);
     embed.setColor(exchange.color);
     embed.setDescription(exchange.description);
     embed.setFooter(exchange.footer.name, exchange.footer.avatar);
@@ -64,5 +64,6 @@ module.exports.run = (client, message, args) => {
 }
 
 module.exports.help = {
-    name: "exchange"
+    name: "exchange",
+    role: "855151242257891348"
 }

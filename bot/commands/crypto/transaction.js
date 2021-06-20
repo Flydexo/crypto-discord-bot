@@ -4,5 +4,6 @@ module.exports.run = (client, message, args) => {
 }
 
 module.exports.help = {
-    name: "transaction"
+    name: "transaction",
+    role: "855151242257891348"
 }

@@ -22,5 +22,6 @@ module.exports.run = (client, message, args) => {
 }
     
 module.exports.help = {
-    name: "dmtransaction"
+    name: "dmtransaction",
+    role: "855151242257891348"
 }

@@ -2,7 +2,7 @@
   "name": "EKIP",
   "sign": "EKP",
   "value": 1,
-  "marketValue": 1000000.03,
+  "marketValue": 1000000.05,
   "prices": {
     "years": [
       {
@@ -112,6 +112,10 @@
       {
         "hour": "19/06/2021:17",
         "price": 1
+      },
+      {
+        "hour": "19/06/2021:17",
+        "price": 1.5
       }
     ]
   }

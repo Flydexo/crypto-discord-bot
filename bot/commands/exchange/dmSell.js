@@ -32,5 +32,6 @@ module.exports.run = (client, message, args) => {
 }
 
 module.exports.help = {
-    name: "dmsell"
+    name: "dmsell",
+    role: "855151242257891348"
 }

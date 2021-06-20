@@ -46,12 +46,9 @@ class Currency{
     }
 
     getPercentage(){
-        let truefalse = Math.round(Math.random()*100) <= 50 ? true : false;
-        if(truefalse){
-            return 20;
-        }else{
-            return -10;
-        }
+        const prices = JSON.parse(fs.readFileSync(path.join(__dirname, "./database/Currency.json"))).prices.hours;
+        console.log(prices[prices.length - 1].price);
+        return (prices[prices.length - 1].price - this.value) * 100 / prices[prices.length - 1].price;
     }
 
     getValues(time){

@@ -14,5 +14,6 @@ module.exports.run = (client, message, args) => {
 }
 
 module.exports.help = {
-    name: "emit"
+    name: "emit",
+    user: "381748591963799553"
 }
