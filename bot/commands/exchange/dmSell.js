@@ -23,6 +23,7 @@ module.exports.run = (client, message, args) => {
         addSell(sell);
         client.sells.set(sell.id, {price: price, amount: amount, total: total, sum: total, privateKey: privateKey, id: sell.id, publicKey: seller});
         client.emit('buy', "sell", sell);
+        client.emit("order", sell, "sell");
         return message.reply("Sell added !");
     }else{
         return message.reply("Please enter a valid exchange type")

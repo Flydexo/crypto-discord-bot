@@ -26,10 +26,11 @@ class Blockchain{
         return this.chain[this.chain.length - 1];
     }
 
-    minePendingTransaction(miningRewardAddress){
+    minePendingTransaction(miningRewardAddress, client){
         let block = new Block(this.pendingTransactions, Date.now(), this.chain[this.chain.length - 1].hash, this.pendingContracts);
         block.mine(this.difficulty);
         this.chain.push(block);
+        client.emit("block", block);
         let data = JSON.parse(fs.readFileSync(path.join(__dirname, "./database/Blockchain.json")));
         data = this.chain;
         fs.writeFileSync(path.join(__dirname, "./database/Blockchain.json"), JSON.stringify(data, null, 2), (err) => {

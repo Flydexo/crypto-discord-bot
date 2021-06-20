@@ -3,13 +3,19 @@ const path = require('path');
 const {Collection} = require('discord.js');
 const buy = require("../events/client/buy");
 
-const initEvents = (client) => {
+const initEvents = (client, blockchain, currency) => {
     const categories = fs.readdirSync("./bot/events/");
     categories.forEach(category => {
-        const events = fs.readdirSync(`./bot/events/${categories}/`);
-        events.forEach(evt => {
-            client.on(evt.split(".")[0], require(`../events/${category}/${evt}`).bind(null, client));
-        })
+        const events = fs.readdirSync(`./bot/events/${category}/`);
+        if(category == "client"){
+            events.forEach(evt => {
+                client.on(evt.split(".")[0], require(`../events/${category}/${evt}`).bind(null, client));
+            })
+        }else{
+            events.forEach(evt => {
+                client.on(evt.split(".")[0], require(`../events/${category}/${evt}`).bind(null, client, blockchain, currency));
+            })
+        }
     })
 }
 

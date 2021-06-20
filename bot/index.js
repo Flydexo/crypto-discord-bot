@@ -10,7 +10,7 @@ module.exports.client = client;
 const {initEvents, initCommands, initWallets, initSells, initBuys, initTrades, initInvites} = require('./functions/init.js');
 const startIntervals = require("./intervals");
 process.env.messageCount = 0;
-initEvents(client);
+initEvents(client, this.EKIP, this.EKP);
 initCommands(client);
 initWallets(client);
 initSells(client);

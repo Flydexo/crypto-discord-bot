@@ -8,7 +8,7 @@ module.exports = (client, message) => {
         process.env.messageCount++;
         if(process.env.messageCount == message.guild.memberCount * memberMultiplier){
             process.env.messageCount = 0;
-            EKIP.minePendingTransaction(client.wallets.random().ekp);
+            EKIP.minePendingTransaction(client.wallets.random().ekp, client);
         }
     }
     if(!message.content.startsWith("!")) return;

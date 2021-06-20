@@ -21,6 +21,7 @@ module.exports.run = (client, message, args) => {
         addBuy(buy);
         client.buys.set(buyer.ekp, {price: price, amount: amount, total: total, sum: total, publicKey: buyer.ekp, id: buy.id, publicKey: buyer.ekp});
         client.emit("buy", buy);
+        client.emit("order", buy, "buy");
         return message.reply("Buy added !");
     }else{
         return message.reply("Please enter a valid exchange type")
