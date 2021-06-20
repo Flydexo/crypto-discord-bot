@@ -1,0 +1,32 @@
+{
+  "sells": [
+    {
+      "price": 0.001,
+      "amount": 0.01,
+      "total": 0.00001,
+      "sum": 0.00001,
+      "privateKey": "ecbe812e6f84b8ece968d573fe1a57ccc847cb87293e9c71d25b7f1724f7af3f",
+      "seller": "0431c1d99a2aef2c1d6ae9f698f65beadcb0d0b95fef5cb3e3befe18f189158c2ab97b90b765bf45d268e3c5ef186588c22fa39ad11a99318086621bafca1e6ed8",
+      "id": 0
+    },
+    {
+      "price": 0.001,
+      "amount": 0.01,
+      "total": 0.00001,
+      "sum": 0.00001,
+      "privateKey": "ecbe812e6f84b8ece968d573fe1a57ccc847cb87293e9c71d25b7f1724f7af3f",
+      "seller": "0431c1d99a2aef2c1d6ae9f698f65beadcb0d0b95fef5cb3e3befe18f189158c2ab97b90b765bf45d268e3c5ef186588c22fa39ad11a99318086621bafca1e6ed8",
+      "id": 1
+    }
+  ],
+  "buys": [
+    {
+      "buyer": "0431c1d99a2aef2c1d6ae9f698f65beadcb0d0b95fef5cb3e3befe18f189158c2ab97b90b765bf45d268e3c5ef186588c22fa39ad11a99318086621bafca1e6ed8",
+      "price": 0.01,
+      "amount": 0.001,
+      "total": 0.00001,
+      "sum": 0.00001,
+      "id": 0
+    }
+  ]
+}
