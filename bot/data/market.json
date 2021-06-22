@@ -1,0 +1,31 @@
+{
+  "sells": [
+    {
+      "price": 10,
+      "amount": 990,
+      "total": 9900,
+      "sum": 9900,
+      "privateKey": "f8d3323cc40d109dbc2c8e0e7392fec7007db38e88acd60599529984b1dd2b8d",
+      "id": 0
+    },
+    {
+      "price": 10,
+      "amount": 1,
+      "total": 10,
+      "sum": 10,
+      "privateKey": "97d2915a10a7483a223c26f98e58ae604698bb952a7667633b94de1fcccbb480",
+      "seller": "041c2d38eb40fc3e772fd64325c25878220b477256359f3bf785e5bf8327aea6dcd3fd6ceb6ab836a9563280f9299cdc9f9a0e93c6038bd768182fee97b8df36a9",
+      "id": 1
+    },
+    {
+      "price": 15,
+      "amount": 3,
+      "total": 45,
+      "sum": 45,
+      "privateKey": "97d2915a10a7483a223c26f98e58ae604698bb952a7667633b94de1fcccbb480",
+      "seller": "041c2d38eb40fc3e772fd64325c25878220b477256359f3bf785e5bf8327aea6dcd3fd6ceb6ab836a9563280f9299cdc9f9a0e93c6038bd768182fee97b8df36a9",
+      "id": 2
+    }
+  ],
+  "buys": []
+}

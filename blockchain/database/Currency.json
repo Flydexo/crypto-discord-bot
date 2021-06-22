@@ -1,0 +1,42 @@
+{
+  "name": "EKIP",
+  "sign": "EKP",
+  "value": 7.5,
+  "marketValue": 7500003.2625,
+  "prices": {
+    "years": [
+      {
+        "year": "2020",
+        "price": 10
+      }
+    ],
+    "months": [
+      {
+        "month": "20/05/2021",
+        "price": 10
+      }
+    ],
+    "weeks": [
+      {
+        "week": "24/06/2021",
+        "price": 10
+      }
+    ],
+    "days": [
+      {
+        "day": "19/06/2021",
+        "price": 10
+      }
+    ],
+    "hours": [
+      {
+        "hour": "20/06/2021:12",
+        "price": 10
+      },
+      {
+        "hour": "20/06/2021:14",
+        "price": 7.5
+      }
+    ]
+  }
+}

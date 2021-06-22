@@ -1,0 +1,25 @@
+{
+  "name": "crypto",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "bot": "nodemon start ./bot/index.js",
+    "crypto": "node ./blockchain/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "canvas": "^2.8.0",
+    "chart.js": "^3.3.2",
+    "chartjs-node-canvas": "^3.2.0",
+    "crypto-js": "^4.0.0",
+    "discord.js": "^12.5.3",
+    "elliptic": "^6.5.4",
+    "form-data": "^4.0.0",
+    "moment": "^2.29.1",
+    "node-fetch": "^2.6.1"
+  }
+}
