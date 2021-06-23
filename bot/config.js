@@ -10,3 +10,4 @@ module.exports.channels = {
 };
 module.exports.guild = "856606969485066240";
 module.exports.APP = "856608083953582151";
+module.exports.holder = "857361017033719889";
