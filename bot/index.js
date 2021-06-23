@@ -18,22 +18,29 @@ initWallets(client);
 initSells(client);
 initBuys(client);
 initTrades(client);
-initSlashCommands(client);
+// initSlashCommands(client);
 startIntervals();
 
 client.ws.on('INTERACTION_CREATE', async interaction => {
-    client.api.interactions(interaction.id, interaction.token).callback.post({data: {
-        type: 5,
+  client.api.interactions(interaction.id, interaction.token).callback.post({data: {
+        type: 4,
         data: {
-          content: "l"
+          content: "Hey",
+          flags: 64
         }
-    }}).then(async () => {
-        const lol = await client.commands.get(interaction.data.name).run(client, interaction.data.options[0].value, interaction);
-        const wc = new DISCORD.WebhookClient(APP, interaction.token);
-        wc.send({
-          files: [lol]
-        });
-    })
+    }})
+    // client.api.interactions(interaction.id, interaction.token).callback.post({data: {
+    //     type: 5,
+    //     data: {
+    //       content: "l"
+    //     }
+    // }}).then(async () => {
+    //     const lol = await client.commands.get(interaction.data.name).run(client, interaction.data.options[0].value, interaction);
+    //     const wc = new DISCORD.WebhookClient(APP, interaction.token);
+    //     wc.send({
+    //       files: [lol]
+    //     });
+    // })
     
 })
 
