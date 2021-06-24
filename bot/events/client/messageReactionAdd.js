@@ -1,7 +1,14 @@
 const createUser = require('../../functions/createUser');
 const generateKeys = require("../../../blockchain/keyGenerator");
 const { guild, holder } = require('../../config');
-module.exports = (client, messageReaction, user) => {
+const fs = require('fs');
+const path = require('path');
+module.exports = async (client, messageReaction, user) => {
+    if(messageReaction.partial){
+        await messageReaction.fetch();
+        return;
+    }
+    console.log("reaction");
     if(user.bot) return;
     if(messageReaction.message.content == "🛑 Do you want to create a user ? If done your old user will be deleted if you have one"){
         if(messageReaction.emoji.toString() == "✅"){
@@ -15,5 +22,13 @@ module.exports = (client, messageReaction, user) => {
             messageReaction.message.channel.send("Goodbye ! 👋");
             return messageReaction.message.delete();
         }
+    }else{
+        console.log("reaction1");
+        const reactions = JSON.parse(fs.readFileSync(path.join(__dirname, "../../data/reactions.json")));
+        reactions.forEach(r => {
+            if(r.message == messageReaction.message.id && r.emoji == messageReaction.emoji.toString()){
+                client.guilds.cache.get(guild).members.cache.get(user.id).roles.add(r.role);
+            }
+        })
     }
 }

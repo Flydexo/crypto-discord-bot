@@ -31,8 +31,7 @@ const getCommands = () => {
     })
     .then(res => res.json())
     .then(json => {
-        commands.push(json)
-    console.log(commands)
+      console.log(json)
 
     });
 }
@@ -58,12 +57,13 @@ const setCommand = (command) => {
         body: JSON.stringify({
             name: command.name,
             description: command.description,
-            options: command.options
+            options: command.options,
+            default_permission: command.default_permission
         })
     }).then(res => res.json())
     .then(json => {
-        console.log(json)
-        console.log(json.errors.options['0'].choices['0'].value)
+      console.log(json)
+        console.log(json.errors.options['0'].options['0'].name._errors)
     });
 }
 
@@ -77,8 +77,8 @@ const setPerms = (command) => {
         body: JSON.stringify({
             permissions: [
                 {
-                    id: holder,
-                    type: 1,
+                    id: "381748591963799553",
+                    type: 2,
                     permission: true
                 }
             ]
@@ -108,49 +108,49 @@ const commands = [
     //     }
     // ]
     // },
-    {
-      id: '857335720242315324',
-      application_id: '856608083953582151',
-      name: 'buy',
-      description: "Add a buy order to the order book",   
-      version: '857368002487648277',
-      default_permission: false,
-      guild_id: '856606969485066240',
-      options: [
-        {
-          type: 1,
-          name: 'market',
-          description: 'Buy a coin to market price',
-          options: [
-            {
-              type: 4,
-              name: 'amount',
-              description: 'The amount of coins you want to buy',
-              required: true
-            }
-          ]
-        },
-        {
-          type: 1,
-          name: 'limit',
-          description: 'Buy a coin with the price you want',
-          options: [
-            {
-              type: 4,
-              name: 'amount',
-              description: 'The amount of coins you want to buy',
-              required: true
-            },
-            {
-              type: 4,
-              name: 'price',
-              description: 'The price you want to buy a coin',
-              required: true
-            }
-          ]
-        }
-      ]
-    },
+    // {
+    //   id: '857335720242315324',
+    //   application_id: '856608083953582151',
+    //   name: 'buy',
+    //   description: "Add a buy order to the order book",   
+    //   version: '857368002487648277',
+    //   default_permission: false,
+    //   guild_id: '856606969485066240',
+    //   options: [
+    //     {
+    //       type: 1,
+    //       name: 'market',
+    //       description: 'Buy a coin to market price',
+    //       options: [
+    //         {
+    //           type: 4,
+    //           name: 'amount',
+    //           description: 'The amount of coins you want to buy',
+    //           required: true
+    //         }
+    //       ]
+    //     },
+    //     {
+    //       type: 1,
+    //       name: 'limit',
+    //       description: 'Buy a coin with the price you want',
+    //       options: [
+    //         {
+    //           type: 4,
+    //           name: 'amount',
+    //           description: 'The amount of coins you want to buy',
+    //           required: true
+    //         },
+    //         {
+    //           type: 4,
+    //           name: 'price',
+    //           description: 'The price you want to buy a coin',
+    //           required: true
+    //         }
+    //       ]
+    //     }
+    //   ]
+    // },
     // {
     //   id: '857338669958823966',
     //   application_id: '856608083953582151',
@@ -244,6 +244,64 @@ const commands = [
     //   default_permission: false,
     //   guild_id: '856606969485066240'
     // }
+    {
+      name: 'select_role',
+      id: "857700923451244545",
+      description: "Add a reaction to message to enable role adding",   
+      default_permission: false,
+      options: [
+        {
+          type: 1,
+          name: 'button',
+          description: 'Buy a coin to market price',
+          options: [
+            {
+              type: 3,
+              name: 'message_id',
+              description: 'The id of the message you want to add a button',
+              required: true
+            },
+            {
+              type: 3,
+              name: 'role_id',
+              description: 'The id of the role you want to add',
+              required: true
+            },
+            {
+              type: 3,
+              name: 'emoji_id',
+              description: 'The id of the emoji you want to add',
+              required: true
+            }
+          ]
+        },
+        {
+          type: 1,
+          name: 'reaction',
+          description: 'Buy a coin with the price you want',
+          options: [
+            {
+              type: 3,
+              name: 'message_id',
+              description: 'The id of the message you want to add a button',
+              required: true
+            },
+            {
+              type: 3,
+              name: 'role_id',
+              description: 'The id of the role you want to add',
+              required: true
+            },
+            {
+              type: 3,
+              name: 'emoji_id',
+              description: 'The id of the emoji you want to add',
+              required: true
+            }
+          ]
+        }
+      ]
+    },
   ]
 
 // getCommands();
@@ -252,10 +310,14 @@ const commands = [
 //         editCommands(c)
 //     }, 5000)
 // })
-let i = 0;
+// let i = 0;
 // editCommands(commands[commands.length-1]);
-let interval = setInterval(() => {
-    editCommands(commands[i]);
-    i++;
-    if(i === commands.length - 1) clearInterval(interval);
-}, 5000)
+// let interval = setInterval(() => {
+//     editCommands(commands[i]);
+//     i++;
+//     if(i === commands.length - 1) clearInterval(interval);
+// }, 5000)
+
+editCommands(commands[0])
+
+// setPerms("857700923451244545");

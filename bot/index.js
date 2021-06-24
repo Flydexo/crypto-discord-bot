@@ -1,6 +1,6 @@
 const DISCORD = require('discord.js');
 const { TOKEN, APP, prefix } = require('./config.js');
-const client = new DISCORD.Client();
+const client = new DISCORD.Client({ partials: ['MESSAGE', 'CHANNEL', 'REACTION'] });
 const Blockchain = require("../blockchain/BlockChain");
 const Currency = require("../blockchain/Currency");
 const fetch = require('node-fetch');
@@ -34,7 +34,7 @@ client.ws.on('INTERACTION_CREATE', async interaction => {
       }})
     }else{
       let content = command.run(client, interaction);
-      if(!command.help.embed){
+      if(!command.help.embed && !command.help.wait){
         if(command.help.visible){
           client.api.interactions(interaction.id, interaction.token).callback.post({data: {
             type: 4,
@@ -76,7 +76,39 @@ client.ws.on('INTERACTION_CREATE', async interaction => {
             wc.send({
               files: [content]
             });
-        })
+          })
+        }
+      }else if(command.help.wait){
+        console.log("wait");
+        if(command.help.visible){
+          client.api.interactions(interaction.id, interaction.token).callback.post({data: {
+            type: 5,
+            data: {
+              content: `waiting...`
+            }
+          }}).then(async () => {
+              const wc = new DISCORD.WebhookClient(APP, interaction.token);
+              content.then(c => {
+                wc.send({
+                  content: c
+                });
+              });
+          })
+        }else{
+          client.api.interactions(interaction.id, interaction.token).callback.post({data: {
+            type: 5,
+            data: {
+              content: `waiting...`,
+              flags: 64
+            }
+          }}).then(async () => {
+            const wc = new DISCORD.WebhookClient(APP, interaction.token);
+            content.then(c => {
+              wc.send({
+                content: c
+              });
+            });
+          })
         }
       }else{
         if(command.help.visible){

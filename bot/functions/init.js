@@ -12,10 +12,12 @@ const initEvents = (client, blockchain, currency) => {
         if(category == "client"){
             events.forEach(evt => {
                 client.on(evt.split(".")[0], require(`../events/${category}/${evt}`).bind(null, client));
+                console.log("New event: ", evt);
             })
         }else{
             events.forEach(evt => {
                 client.on(evt.split(".")[0], require(`../events/${category}/${evt}`).bind(null, client, blockchain, currency));
+                console.log("New event: ", evt);
             })
         }
     })
@@ -115,5 +117,5 @@ module.exports = {
     initBuys,
     initTrades,
     initInvites,
-    initSlashCommands
+    initSlashCommands,
 }
