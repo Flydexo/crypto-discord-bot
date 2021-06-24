@@ -3,10 +3,11 @@ const {EKP} = require("../../index");
 const {addBuy} = require("../../functions/market.js");
 const { commands } = require("../../data/commands");
 
-module.exports.run = (client, message, args) => {
-    const amount = parseFloat(args[0]);
-    const exchangeType = args[1];
-    const buyer = client.wallets.get(message.author.id);
+module.exports.run = (client, interaction) => {
+    console.log(interaction.data.options[0].options[0])
+    const amount = parseFloat(interaction.data.options[0].options[0].value);
+    const exchangeType = interaction.data.options[0].name;
+    const buyer = client.wallets.get(interaction.member.user.id);
     if(!exchangeType) return message.reply("Please enter an exchange type");
     if(exchangeType == "market" || !isNaN(parseFloat(exchangeType))){
         const price = exchangeType == "market" ? EKP.getValue() : parseFloat(exchangeType);
@@ -23,9 +24,9 @@ module.exports.run = (client, message, args) => {
         client.buys.set(buyer.ekp, {price: price, amount: amount, total: total, sum: total, publicKey: buyer.ekp, id: buy.id, publicKey: buyer.ekp});
         client.emit("buy", buy);
         client.emit("order", buy, "buy");
-        return message.reply("Buy added !");
+        return "Buy added !";
     }else{
-        return message.reply("Please enter a valid exchange type")
+        return "Please enter a valid exchange type"
     }
     // client.selling.set(message.author.id, {amount: amount, publicKey: seller.ekp, privateKey: privateKey});
 }

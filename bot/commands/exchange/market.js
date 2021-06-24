@@ -4,8 +4,9 @@ const fs = require("fs");
 const path = require("path");
 const { commands } = require("../../data/commands");
 
-module.exports.run = (client, message, args) => {
+module.exports.run = (client, interaction) => {
     const market = JSON.parse(fs.readFileSync(path.join(__dirname, "../../data/market.json")));
+    const user = client.users.cache.get(interaction.member.user.id);
     let sells = [];
     market.sells.forEach((sell, index) => {
         if(index > 5) return;
@@ -19,7 +20,7 @@ module.exports.run = (client, message, args) => {
     });
     if(market.buys.length < 1) buys[0] = "nothing";
     const embed = new MessageEmbed();
-    embed.setAuthor(message.author.username, message.author.avatarURL());
+    embed.setAuthor(user.username, user.avatarURL());
     embed.setColor("#EB459E");
     embed.setDescription(`Here is the market of the EKIP currency !`);
     embed.setFooter(client.user.username, client.user.avatarURL());
@@ -27,7 +28,7 @@ module.exports.run = (client, message, args) => {
     embed.setTitle(`EKIP Market`);
     embed.addField("Buys", buys.join('\n\n'));
     embed.addField("Sells", sells.join("\n\n"));
-    message.channel.send(embed);
+    return embed;
 }
 
 module.exports.help = commands.orders;

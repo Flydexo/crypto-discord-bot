@@ -27,5 +27,14 @@
       "id": 2
     }
   ],
-  "buys": []
+  "buys": [
+    {
+      "buyer": "04360f475e595f955652928dff1491bcd3bfc874887cafb1da07ce73643e033b70acfc81b275a0bde312e4ee819127bf5d3b3203774f45aad7c25f5ad22918c321",
+      "price": 7.5,
+      "amount": 1,
+      "total": 7.5,
+      "sum": 7.5,
+      "id": 0
+    }
+  ]
 }
