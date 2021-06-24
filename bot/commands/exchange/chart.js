@@ -3,10 +3,12 @@ const {MessageAttachment} = require("discord.js");
 const fs = require("fs");
 const path = require('path');
 const {guild, channels} = require('../../config');
+const { commands } = require('../../data/commands');
 
-module.exports.run = (client, message, args) => {
+module.exports.run = (client, interaction) => {
     const types = ["y", "year", "month", "m", "week", "w", "day", "d", "hour", "h"];
-    let type = args;
+    let type = interaction.data.options[0].value;
+    console.log(type);
     if(!types.includes(type)) type = "w"
     const jsonData = JSON.parse(fs.readFileSync(path.join(__dirname, "../../../blockchain/database/Currency.json"))).prices;
     function getLabels(){
@@ -57,6 +59,4 @@ module.exports.run = (client, message, args) => {
     })();
 }
 
-module.exports.help = {
-    name: "chart"
-}
+module.exports.help = commands.chart;

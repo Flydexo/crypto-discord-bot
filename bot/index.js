@@ -1,5 +1,5 @@
 const DISCORD = require('discord.js');
-const { TOKEN, APP } = require('./config.js');
+const { TOKEN, APP, prefix } = require('./config.js');
 const client = new DISCORD.Client();
 const Blockchain = require("../blockchain/BlockChain");
 const Currency = require("../blockchain/Currency");
@@ -22,26 +22,65 @@ initTrades(client);
 startIntervals();
 
 client.ws.on('INTERACTION_CREATE', async interaction => {
-  client.api.interactions(interaction.id, interaction.token).callback.post({data: {
+  if(client.commands.has(interaction.data.name)){
+    const command = client.commands.get(interaction.data.name);
+    if(command.help.dm){
+      client.api.interactions(interaction.id, interaction.token).callback.post({data: {
         type: 4,
         data: {
-          content: "Hey",
+          content: `Please write this command in **DM** with this \`${prefix}${command.help.name} ${command.help.usage}\``,
           flags: 64
         }
-    }})
-    // client.api.interactions(interaction.id, interaction.token).callback.post({data: {
-    //     type: 5,
-    //     data: {
-    //       content: "l"
-    //     }
-    // }}).then(async () => {
-    //     const lol = await client.commands.get(interaction.data.name).run(client, interaction.data.options[0].value, interaction);
-    //     const wc = new DISCORD.WebhookClient(APP, interaction.token);
-    //     wc.send({
-    //       files: [lol]
-    //     });
-    // })
-    
+      }})
+    }else{
+      let content = command.run(client, interaction);
+      if(!command.help.file){
+        if(command.help.visible){
+          client.api.interactions(interaction.id, interaction.token).callback.post({data: {
+            type: 4,
+            data: {
+              content: `Nice`
+            }
+          }})
+        }else{
+          client.api.interactions(interaction.id, interaction.token).callback.post({data: {
+            type: 4,
+            data: {
+              content: `Nice`,
+              flags: 64
+            }
+          }})
+        }
+      }else{
+        if(command.help.visible){
+          client.api.interactions(interaction.id, interaction.token).callback.post({data: {
+            type: 5,
+            data: {
+              content: `waiting...`
+            }
+          }}).then(async () => {
+              const wc = new DISCORD.WebhookClient(APP, interaction.token);
+              wc.send({
+                files: [content]
+              });
+          })
+        }else{
+          client.api.interactions(interaction.id, interaction.token).callback.post({data: {
+            type: 5,
+            data: {
+              content: `waiting...`,
+              flags: 64
+            }
+          }}).then(async () => {
+            const wc = new DISCORD.WebhookClient(APP, interaction.token);
+            wc.send({
+              files: [content]
+            });
+        })
+        }
+      }
+    }
+  }    
 })
 
 client.login(TOKEN);

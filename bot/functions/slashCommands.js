@@ -1,10 +1,8 @@
 const fetch = require('node-fetch');
 const { APP, guild, TOKEN, holder } = require('../config');
-let commands = [];
 
 const editCommands = (command) => {
     console.log(command.id);
-    command.default_permissions = false;
     fetch(`https://discord.com/api/applications/${APP}/guilds/${guild}/commands/${command.id}`, {
         method: 'PATCH',
         headers: {
@@ -92,130 +90,149 @@ const setPerms = (command) => {
     })
 }
 
-let command2 = {
-    name: "buy",
-    description: "Ajouter un ordre d'achat au cahier des ordres",
-    options: [
+const commands = [
+    // {
+    //   id: '857319079026491402',
+    //   application_id: '856608083953582151',
+    //   name: 'public',
+    //   description: "Get the public address of the mentionned member",
+    //   version: '857368002730393670',
+    //   default_permission: true,
+    //   guild_id: '856606969485066240',
+    //   options: [
+    //     {
+    //       type: 6,
+    //       name: 'membre',
+    //       description: "The member who you want to get his public address",
+    //       required: true
+    //     }
+    // ]
+    // },
+    // {
+    //   id: '857335720242315324',
+    //   application_id: '856608083953582151',
+    //   name: 'buy',
+    //   description: "Add a buy order to the order book",   
+    //   version: '857368002487648277',
+    //   default_permission: true,
+    //   guild_id: '856606969485066240',
+    //   options: [
+    //     {
+    //       type: 1,
+    //       name: 'market',
+    //       description: 'Buy a coin to market price',
+    //     },
+    //     {
+    //       type: 1,
+    //       name: 'limit',
+    //       description: 'Buy a coin with the price you want',
+    //     }
+    //   ]
+    // },
+    // {
+    //   id: '857338669958823966',
+    //   application_id: '856608083953582151',
+    //   name: 'orders',
+    //   description: "Get the order book",
+    //   version: '857338669958823967',
+    //   default_permission: true,
+    //   guild_id: '856606969485066240'
+    // },
+    // {
+    //   id: '857338918701891607',
+    //   application_id: '856608083953582151',
+    //   name: 'exchange',
+    //   description: "Get the basic interface to trade with EKP",
+    //   version: '857338918701891608',
+    //   default_permission: true,
+    //   guild_id: '856606969485066240'
+    // },
+    {
+      id: '857340460763054080',
+      application_id: '856608083953582151',
+      name: 'chart',
+      description: "Get the EKP's price's chart",
+      version: '857368002764996608',
+      default_permission: true,
+      guild_id: '856606969485066240',
+      options: [
         {
-            name: "market",
-            description: "Acheter un coin au prix du marché",
-            type: 1,
-            options: [
-                {
-                    name: "nombre",
-                    description: "Le nombre de coins que vous voulez acheter",
-                    required: true,
-                    type: 4,
-                },
-            ]
-        },
-        {
-            name: "limit",
-            description: "Acheter un coin à votre prix",
-            type: 1,
-            options: [
-                {
-                    name: "prix",
-                    description: "Le prix auquel vous voulez acheter un coin",
-                    required: true,
-                    type: 4,
-                },
-                {
-                    name: "nombre",
-                    description: "Le nombre de coins que vous voulez acheter",
-                    required: true,
-                    type: 4,
-                }
-            ]
+          type: 3,
+          name: 'time',
+          description: 'The time you want the chart to include',
+          required: true,
+          choices: [
+              {
+                  name: "hour",
+                  value: "hour"
+              },
+              {
+                name: "day",
+                value: "day"
+            },
+            {
+                name: "week",
+                value: "week"
+            },
+            {
+                name: "month",
+                value: "month"
+            },
+            {
+                name: "year",
+                value: "year"
+            }
+          ]
         }
-    ]
-}
+      ]
+    },
+    // {
+    //   id: '857342635277418536',
+    //   application_id: '856608083953582151',
+    //   name: 'sell',
+    //   description: "Add a sell order to the order book",
+    //   version: '857342635277418537',
+    //   default_permission: true,
+    //   guild_id: '856606969485066240'
+    // },
+    // {
+    //   id: '857343135485788181',
+    //   application_id: '856608083953582151',
+    //   name: 'transaction',
+    //   description: 'Make a transaction',
+    //   version: '857368002756476969',
+    //   default_permission: true,
+    //   guild_id: '856606969485066240'
+    // },
+    // {
+    //   id: '857362543176581150',
+    //   application_id: '856608083953582151',
+    //   name: 'new_wallet',
+    //   description: 'Create an EKP wallet',
+    //   version: '857362543176581151',
+    //   default_permission: true,
+    //   guild_id: '856606969485066240'
+    // },
+    // {
+    //   id: '857362707782696989',
+    //   application_id: '856608083953582151',
+    //   name: 'balance',
+    //   description: 'Get your dollar and EKP balance',
+    //   version: '857368002776924170',
+    //   default_permission: true,
+    //   guild_id: '856606969485066240'
+    // }
+  ]
 
-let command3 = {
-    name: "orders",
-    description: "Voir le carnet d'odres"
-}
-
-let command4 = {
-    name: "chart",
-    description: "Pour voir le graphique du prix de l'EKP",
-    options: [
-        {
-            name: "temps",
-            description: "La durée de prix affichés",
-            type: 3,
-            choices: [
-                {
-                    name: "hour",
-                    value: "hour"
-                },
-                {
-                    name: "day",
-                    value: "day"
-                },
-                {
-                    name: "week",
-                    value: "week"
-                },
-                {
-                    name: "month",
-                    value: "month"
-                },
-                {
-                    name: "year",
-                    value: "year"
-                }
-            ]
-        }
-    ]
-}
-
-let command5 = {
-    name: "sell",
-    description: "Ajouter un ordre de vente au carnet d'ordres"
-}
-
-let command6 = {
-    name: "transaction",
-    description: "Effectuer une transaction"
-}
-
-let command7 = {
-    name: "new_wallet",
-    description: "Créer un porte-feuille EKP"
-}
-
-let command = {
-    name: "balance",
-    description: "Voir votre porte-feuille"
-}
-// options: command.options
-// setCommand(command);
-getCommands();
-// setTimeout(() => {
-//     commands[0].forEach(c => {
-//         setTimeout(() => {
-//             editCommands(c);
-//         }, 500)
-//     })
-// }, 2000)
-// setTimeout(() => {
-//     setPerms("857335720242315324");
-//     setPerms("857338669958823966");
-//     setPerms("857338918701891607");
-//     setPerms("857340460763054080");
-// }, 500)
-// setTimeout(() => {
-//     setPerms("857342635277418536");
-//     setPerms("857343135485788181");
-//     setPerms("857319079026491402");
-//     setPerms("857362707782696989");
-// }, 500)
-// deleteCommand("857313172733558844")
-// deleteCommand("857317589550366780")
-
-// 856613651763167232
-// 856613093895438346
-// 856613521731354675
-
-// /guilds/${guild}/
+// getCommands();
+// commands.forEach(c => {
+//     setTimeout(() => {
+//         editCommands(c)
+//     }, 5000)
+// })
+let i = 0;
+let interval = setInterval(() => {
+    editCommands(commands[i]);
+    i++;
+    if(i === commands.length - 1) clearInterval(interval);
+}, 5000)
