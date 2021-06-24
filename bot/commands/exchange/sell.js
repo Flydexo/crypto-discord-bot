@@ -1,4 +1,5 @@
 const {MessageEmbed} = require("discord.js");
+const { commands } = require("../../data/commands");
 const {EKIP} = require("../../index");
 
 module.exports.run = (client, message, args) => {
@@ -6,7 +7,4 @@ module.exports.run = (client, message, args) => {
     message.reply("We sent you a DM !");
 }
 
-module.exports.help = {
-    name: "sell",
-    role: "855151242257891348"
-}
+module.exports.help = commands.sell;

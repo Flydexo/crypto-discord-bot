@@ -2,6 +2,7 @@ const {MessageEmbed} = require("discord.js");
 const {EKIP} = require("../../index");
 const fs = require("fs");
 const path = require("path");
+const { commands } = require("../../data/commands");
 
 module.exports.run = (client, message, args) => {
     const market = JSON.parse(fs.readFileSync(path.join(__dirname, "../../data/market.json")));
@@ -29,6 +30,4 @@ module.exports.run = (client, message, args) => {
     message.channel.send(embed);
 }
 
-module.exports.help = {
-    name: "market"
-}
+module.exports.help = commands.orders;

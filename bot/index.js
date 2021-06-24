@@ -34,24 +34,24 @@ client.ws.on('INTERACTION_CREATE', async interaction => {
       }})
     }else{
       let content = command.run(client, interaction);
-      if(!command.help.file){
+      if(!command.help.embed){
         if(command.help.visible){
           client.api.interactions(interaction.id, interaction.token).callback.post({data: {
             type: 4,
             data: {
-              content: `Nice`
+              content: content
             }
           }})
         }else{
           client.api.interactions(interaction.id, interaction.token).callback.post({data: {
             type: 4,
             data: {
-              content: `Nice`,
+              content: content,
               flags: 64
             }
           }})
         }
-      }else{
+      }else if(command.help.file){
         if(command.help.visible){
           client.api.interactions(interaction.id, interaction.token).callback.post({data: {
             type: 5,
@@ -77,6 +77,33 @@ client.ws.on('INTERACTION_CREATE', async interaction => {
               files: [content]
             });
         })
+        }
+      }else{
+        if(command.help.visible){
+          client.api.interactions(interaction.id, interaction.token).callback.post({data: {
+            type: 5,
+            data: {
+              content: `waiting...`
+            }
+          }}).then(async () => {
+              const wc = new DISCORD.WebhookClient(APP, interaction.token);
+              wc.send({
+                embeds: [content]
+              });
+          })
+        }else{
+          client.api.interactions(interaction.id, interaction.token).callback.post({data: {
+              type: 5,
+              data: {
+                content: `waiting...`,
+                flags: 64
+              }
+            }}).then(async () => {
+              const wc = new DISCORD.WebhookClient(APP, interaction.token);
+              wc.send({
+                embeds: [content]
+              });
+          })
         }
       }
     }

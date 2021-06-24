@@ -3,8 +3,10 @@ const {EKIP, EKP} = require("../../index");
 const fs = require("fs");
 const path = require("path");
 const { ChartJSNodeCanvas } = require('chartjs-node-canvas');
+const { commands } = require("../../data/commands");
+const { Interaction } = require("chart.js");
 
-module.exports.run = (client, message, args) => {
+module.exports.run = (client, interaction) => {
     const market = JSON.parse(fs.readFileSync(path.join(__dirname, "../../data/market.json")));
     let sells = [];
     market.sells.forEach((sell, index) => {
@@ -21,9 +23,10 @@ module.exports.run = (client, message, args) => {
     let percentage = EKP.getPercentage();
     if(percentage < 100) percentage -= percentage * 2; 
     console.log("percentage", percentage);
+    const user = client.users.cache.get(interaction.member.user.id);
     const exchange = {
         title: "Trade Ekip (EKP)",
-        description: `Here you can see the actual Ekip price and his evolution ${args[0]}`,
+        description: `Here you can see the actual Ekip price and his evolution`,
         image: "https://www.gizmotimes.com/wp-content/uploads/2018/02/Crypto-Graph.png",
         fields: [
             {
@@ -41,8 +44,8 @@ module.exports.run = (client, message, args) => {
         ],
         color: percentage > 0 ? "#57F287" : "#ED4245",
         author: {
-            name: message.author.username,
-            avatar: message.author.avatarURL()
+            name: user.username,
+            avatar: user.avatarURL()
         },
         footer: {
             name: client.user.username,
@@ -60,10 +63,7 @@ module.exports.run = (client, message, args) => {
     exchange.fields.forEach(f => {
         embed.addField(f.title, f.description);
     })
-    message.channel.send(embed);
+    return embed;
 }
 
-module.exports.help = {
-    name: "exchange",
-    role: "855151242257891348"
-}
+module.exports.help = commands.exchange;

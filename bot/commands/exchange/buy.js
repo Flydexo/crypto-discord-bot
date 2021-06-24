@@ -1,6 +1,7 @@
 const {MessageEmbed} = require("discord.js");
 const {EKP} = require("../../index");
 const {addBuy} = require("../../functions/market.js");
+const { commands } = require("../../data/commands");
 
 module.exports.run = (client, message, args) => {
     const amount = parseFloat(args[0]);
@@ -29,7 +30,4 @@ module.exports.run = (client, message, args) => {
     // client.selling.set(message.author.id, {amount: amount, publicKey: seller.ekp, privateKey: privateKey});
 }
 
-module.exports.help = {
-    name: "buy",
-    role: "855151242257891348"
-}
+module.exports.help = commands.buy;
