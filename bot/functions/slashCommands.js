@@ -312,6 +312,12 @@ const commands = [
               description: 'The id of the emoji you want to add',
               required: false
             },
+            {
+              type: 3,
+              name: 'url',
+              description: 'The url you want to redirect',
+              required: false
+            },
           ]
         },
         {

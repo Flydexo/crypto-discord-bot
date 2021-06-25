@@ -11,20 +11,21 @@ module.exports.run = (client, interaction) => {
         const role = interaction.options.get("button").options.get("role").role;
         console.log(interaction.options.get("button").options);
         if(!role) interaction.reply("Role invalid");
-        const button = {
-            type: 2,
-            style: 1,
-            label: "I have read the rules and I accept them",
-            custom_id: `role_${interaction.channelID}_${message.id}_${role.id}`
-        };
-        console.log(button);
+
+        const button = new MessageButton()
+            .setLabel(interaction.options.get("button").options.get("label").value)
+            .setStyle(interaction.options.get("button").options.get("type").value)
+        if(interaction.options.get("button").options.get("emoji_id")){
+            button.setEmoji(interaction.options.get("button").options.get("emoji_id").value)
+        }
+        if(interaction.options.get("button").options.get("url") && interaction.options.get("button").options.get("type").value == "LINK"){
+            button.setURL(interaction.options.get("button").options.get("url").value)
+        }
+        if(!button.url){
+            button.setCustomID(`role_${interaction.channelID}_${message.id}_${role.id}`)
+        }
         const row = new MessageActionRow()
-			.addComponents(
-				new MessageButton()
-					.setCustomID(`role_${interaction.channelID}_${message.id}_${role.id}`)
-					.setLabel(interaction.options.get("button").options.get("label").value)
-					.setStyle(interaction.options.get("button").options.get("type").value),
-			);
+			.addComponents(button);
         console.log(row);
         if(message.embeds.length > 0){
             await interaction.reply({
