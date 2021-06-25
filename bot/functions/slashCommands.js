@@ -2,7 +2,7 @@ const fetch = require('node-fetch');
 const { APP, guild, TOKEN, holder } = require('../config');
 
 const editCommands = (command) => {
-    console.log(command.id);
+    console.log(command);
     fetch(`https://discord.com/api/applications/${APP}/guilds/${guild}/commands/${command.id}`, {
         method: 'PATCH',
         headers: {
@@ -31,7 +31,7 @@ const getCommands = () => {
     })
     .then(res => res.json())
     .then(json => {
-      console.log(json)
+      console.log(json[json.length - 1].options[0].options)
 
     });
 }
@@ -80,6 +80,11 @@ const setPerms = (command) => {
                     id: "381748591963799553",
                     type: 2,
                     permission: true
+                },
+                {
+                  id: "769993431828660224",
+                  type: 2,
+                  permission: true
                 }
             ]
         })
@@ -269,10 +274,44 @@ const commands = [
             },
             {
               type: 3,
+              name: 'type',
+              description: 'The type of butto you want to add',
+              required: true,
+              choices: [
+                {
+                  name: "blue",
+                  value: "PRIMARY"
+                },
+                {
+                  name: "grey",
+                  value: "SECONDARY"
+                },
+                {
+                  name: "green",
+                  value: "SUCCESS"
+                },
+                {
+                  name: "red",
+                  value: "DANGER"
+                },
+                {
+                  name: "link",
+                  value: "LINK"
+                }
+              ],
+            },
+            {
+              type: 3,
+              name: "label",
+              description: "The label of the button",
+              required: true
+            },
+            {
+              type: 3,
               name: 'emoji_id',
               description: 'The id of the emoji you want to add',
-              required: true
-            }
+              required: false
+            },
           ]
         },
         {
@@ -320,4 +359,4 @@ const commands = [
 
 editCommands(commands[0])
 
-// setPerms("857700923451244545");
+// setPerms(commands[0]);

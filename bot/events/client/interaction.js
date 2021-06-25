@@ -12,7 +12,7 @@ module.exports = async (client, interaction) => {
                 ephemeral: true,
                 content: "Role added"
             })
-            interaction.member.roles.add("857361017033719889")
+            interaction.member.roles.add(interaction.customID.split("_")[3])
         }
     }else{
         interaction.reply("Error");
