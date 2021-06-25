@@ -262,8 +262,8 @@ const commands = [
               required: true
             },
             {
-              type: 3,
-              name: 'role_id',
+              type: 8,
+              name: 'role',
               description: 'The id of the role you want to add',
               required: true
             },
@@ -287,8 +287,8 @@ const commands = [
               required: true
             },
             {
-              type: 3,
-              name: 'role_id',
+              type: 8,
+              name: 'role',
               description: 'The id of the role you want to add',
               required: true
             },

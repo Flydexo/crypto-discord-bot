@@ -16,7 +16,7 @@
     "chart.js": "^3.3.2",
     "chartjs-node-canvas": "^3.2.0",
     "crypto-js": "^4.0.0",
-    "discord.js": "^12.5.3",
+    "discord.js": "^13.0.0-dev.5af2ef5fbc7ad11281f38384c360ae79efe63b39",
     "elliptic": "^6.5.4",
     "form-data": "^4.0.0",
     "moment": "^2.29.1",

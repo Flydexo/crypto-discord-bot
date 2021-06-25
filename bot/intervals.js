@@ -59,7 +59,6 @@ const startIntervals = () => {
             sum = 0;
             data.prices.weeks.forEach(h => {
                 if(h.week.split('/')[1] == month.split("/")[1] && h.week.split('/')[2] == month.split("/")[2]){
-                    console.log('sum', h.week, month);
                     sum++;
                     price += h.price;
                 }
