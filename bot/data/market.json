@@ -1,40 +1,51 @@
 {
-  "sells": [
+  "sells": [],
+  "buys": [
     {
-      "price": 10,
-      "amount": 990,
-      "total": 9900,
-      "sum": 9900,
-      "privateKey": "f8d3323cc40d109dbc2c8e0e7392fec7007db38e88acd60599529984b1dd2b8d",
+      "buyer": "04cc0fa0177730c519ac0e51a61b8762b1ae786d66fa966c479c36dd934ac872bce237e119d670d60a9185879ab40019d5cbe554c5bb3524821de80df7d643d7f7",
+      "amount": 1,
+      "total": null,
+      "sum": null,
       "id": 0
     },
     {
-      "price": 10,
+      "buyer": "04cc0fa0177730c519ac0e51a61b8762b1ae786d66fa966c479c36dd934ac872bce237e119d670d60a9185879ab40019d5cbe554c5bb3524821de80df7d643d7f7",
       "amount": 1,
-      "total": 10,
-      "sum": 10,
-      "privateKey": "97d2915a10a7483a223c26f98e58ae604698bb952a7667633b94de1fcccbb480",
-      "seller": "041c2d38eb40fc3e772fd64325c25878220b477256359f3bf785e5bf8327aea6dcd3fd6ceb6ab836a9563280f9299cdc9f9a0e93c6038bd768182fee97b8df36a9",
+      "total": null,
+      "sum": null,
       "id": 1
     },
     {
-      "price": 15,
-      "amount": 3,
-      "total": 45,
-      "sum": 45,
-      "privateKey": "97d2915a10a7483a223c26f98e58ae604698bb952a7667633b94de1fcccbb480",
-      "seller": "041c2d38eb40fc3e772fd64325c25878220b477256359f3bf785e5bf8327aea6dcd3fd6ceb6ab836a9563280f9299cdc9f9a0e93c6038bd768182fee97b8df36a9",
-      "id": 2
-    }
-  ],
-  "buys": [
-    {
-      "buyer": "04360f475e595f955652928dff1491bcd3bfc874887cafb1da07ce73643e033b70acfc81b275a0bde312e4ee819127bf5d3b3203774f45aad7c25f5ad22918c321",
-      "price": 7.5,
+      "buyer": "04cc0fa0177730c519ac0e51a61b8762b1ae786d66fa966c479c36dd934ac872bce237e119d670d60a9185879ab40019d5cbe554c5bb3524821de80df7d643d7f7",
+      "price": 1,
       "amount": 1,
-      "total": 7.5,
-      "sum": 7.5,
-      "id": 0
+      "total": 1,
+      "sum": 1,
+      "id": 2
+    },
+    {
+      "buyer": "04cc0fa0177730c519ac0e51a61b8762b1ae786d66fa966c479c36dd934ac872bce237e119d670d60a9185879ab40019d5cbe554c5bb3524821de80df7d643d7f7",
+      "price": 1,
+      "amount": 1,
+      "total": 1,
+      "sum": 1,
+      "id": 3
+    },
+    {
+      "buyer": "04cc0fa0177730c519ac0e51a61b8762b1ae786d66fa966c479c36dd934ac872bce237e119d670d60a9185879ab40019d5cbe554c5bb3524821de80df7d643d7f7",
+      "price": 1,
+      "amount": 1,
+      "total": 1,
+      "sum": 1,
+      "id": 4
+    },
+    {
+      "buyer": "04cc0fa0177730c519ac0e51a61b8762b1ae786d66fa966c479c36dd934ac872bce237e119d670d60a9185879ab40019d5cbe554c5bb3524821de80df7d643d7f7",
+      "price": 1,
+      "amount": 1,
+      "total": 1,
+      "sum": 1,
+      "id": 5
     }
   ]
 }

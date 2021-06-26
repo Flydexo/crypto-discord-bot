@@ -1,5 +1,5 @@
 const {EKIP} = require("../../index");
-const {memberMultiplier, messageLength} = require('../../config');
+const {memberMultiplier, messageLength, prefix} = require('../../config');
 
 module.exports = (client, message) => {
     if(message.author.bot) return;
@@ -11,8 +11,8 @@ module.exports = (client, message) => {
             EKIP.minePendingTransaction(client.wallets.random().ekp, client);
         }
     }
-    if(!message.content.startsWith("!")) return;
-    const args = message.content.slice(1).trim().split(/ +/);
+    if(!message.content.startsWith(prefix)) return;
+    const args = message.content.slice(prefix.length).trim().split(/ +/);
     const command = args.shift();
     const cmd = client.commands.get(command);
     if(!cmd) return;

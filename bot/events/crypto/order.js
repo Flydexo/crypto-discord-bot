@@ -2,6 +2,7 @@ const { MessageEmbed } = require("discord.js");
 const { guild, channels } = require("../../config")
 
 module.exports = (client, blockchain, currency, order, type) => {
+    console.log("order event")
     const embed = new MessageEmbed();
     embed.setColor("#ED4245");
     embed.setDescription(`The new ${type} order added`);
@@ -9,5 +10,7 @@ module.exports = (client, blockchain, currency, order, type) => {
     embed.setTimestamp(Date.now());
     embed.setTitle(`New Order`);
     embed.addField(`${type} order:`, `Price: **${order.price} USDT** Amount: **${order.amount} EKP**  Total: **${order.total} USDT** Sum: **${order.sum} USDT**`);
-    client.guilds.cache.get(guild).channels.cache.get(channels.order).send(embed);
+    client.guilds.cache.get(guild).channels.cache.get(channels.order).send({
+        embeds: [embed]
+    });
 }

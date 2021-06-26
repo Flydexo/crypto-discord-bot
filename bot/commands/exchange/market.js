@@ -28,7 +28,10 @@ module.exports.run = (client, interaction) => {
     embed.setTitle(`EKIP Market`);
     embed.addField("Buys", buys.join('\n\n'));
     embed.addField("Sells", sells.join("\n\n"));
-    return embed;
+    interaction.reply({
+        ephemeral: true,
+        embeds: [embed]
+    })
 }
 
 module.exports.help = commands.orders;

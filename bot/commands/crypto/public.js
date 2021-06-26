@@ -6,7 +6,10 @@ module.exports.run = (client, interaction) => {
     console.log(user);
     const wallet = client.wallets.get(user.id);
     if(!wallet) return'This member has not created an account already.'
-    return `${user}'s wallet address: \`${wallet.ekp}\``
+    interaction.reply({
+        content: `${user}'s wallet address: \`${wallet.ekp}\``,
+        ephemeral: true
+    })
 }
 
 module.exports.help = commands.public;

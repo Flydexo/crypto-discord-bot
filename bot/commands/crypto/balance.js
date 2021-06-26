@@ -13,7 +13,10 @@ module.exports.run = (client, interaction) => {
     embed.setTitle(`${user.username}'s balance !`);
     embed.addField("Balance", `**${EKIP.getBalance(client.wallets.get(user.id).ekp)}** EKP`);
     embed.addField("Fake Dollar Balance", `**${client.wallets.get(user.id).doll}** $`);
-    return embed;
+    interaction.reply({
+        embeds: [embed],
+        ephemeral: true
+    })
 }
 
 module.exports.help = commands.balance;

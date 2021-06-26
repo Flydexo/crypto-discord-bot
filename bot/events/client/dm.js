@@ -1,7 +1,9 @@
+const {prefix} = require("../../config");
+
 module.exports = (client, message) => {
     if(message.author.bot) return;
-    if(!message.content.includes("!")) return;
-    const args = message.content.slice(1).trim().split(/ +/);
+    if(!message.content.startsWith(prefix)) return;
+    const args = message.content.slice(prefix.length).trim().split(/ +/);
     let command = args.shift();
     if(command == "transaction") {
         command = "dmtransaction"

@@ -7,7 +7,7 @@ const { commands } = require('../../data/commands');
 
 module.exports.run = (client, interaction) => {
     const types = ["y", "year", "month", "m", "week", "w", "day", "d", "hour", "h"];
-    let type = interaction.data.options[0].value;
+    let type = interaction.options.first().value;
     console.log(type);
     if(!types.includes(type)) type = "w"
     const jsonData = JSON.parse(fs.readFileSync(path.join(__dirname, "../../../blockchain/database/Currency.json"))).prices;
@@ -28,7 +28,7 @@ module.exports.run = (client, interaction) => {
     const width = 600; //px
     const height = 400; //px
     const chartJSNodeCanvas = new ChartJSNodeCanvas({ width, height });
-    return (async () => {
+    (async () => {
         const data = {
             labels: getLabels(),
             datasets: [{
@@ -55,7 +55,10 @@ module.exports.run = (client, interaction) => {
            plugins: [plugin]
         };
         const image = await chartJSNodeCanvas.renderToBuffer(configuration);
-        return image;
+        interaction.reply({
+            files: [image],
+            ephemeral: true
+        });
     })();
 }
 

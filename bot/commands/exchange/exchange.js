@@ -63,7 +63,10 @@ module.exports.run = (client, interaction) => {
     exchange.fields.forEach(f => {
         embed.addField(f.title, f.description);
     })
-    return embed;
+    interaction.reply({
+        embeds: [embed],
+        ephemeral: true
+    });
 }
 
 module.exports.help = commands.exchange;

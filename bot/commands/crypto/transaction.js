@@ -1,7 +1,12 @@
+const { prefix } = require("../../config");
 const { commands } = require("../../data/commands");
 
 module.exports.run = (client, interraction) => {
-   return "type your transaction !transaction privateKey toAddress amount";
+   interraction.member.user.send(`\`${prefix}transaction privateKey toAddress amount\``);
+   interraction.reply({
+      ephemeral: true,
+      content: "Check your DMs"
+   })
 }
 
 module.exports.help = commands.transaction;
