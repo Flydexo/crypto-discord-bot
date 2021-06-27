@@ -8,6 +8,7 @@ var FormData = require("form-data");
 
 module.exports.EKIP = new Blockchain();
 module.exports.EKP = new Currency();
+if(!this.EKIP.isChainValid()) throw "Chain INVALID !!!!!!!!!!"
 module.exports.client = client;
 const {initEvents, initCommands, initWallets, initSells, initBuys, initTrades, initInvites, initSlashCommands} = require('./functions/init.js');
 const startIntervals = require("./intervals");

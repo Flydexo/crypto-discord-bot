@@ -220,7 +220,53 @@ const commands = [
     //   description: "Add a sell order to the order book",
     //   version: '857342635277418537',
     //   default_permission: false,
-    //   guild_id: '856606969485066240'
+    //   guild_id: '856606969485066240',
+    //   options: [
+    //     {
+    //       type: 1,
+    //       name: "market",
+    //       description: "Sell to the market price",
+    //       options: [
+    //         {
+    //           type: 3,
+    //           name: "private_key",
+    //           description: "Your private key",
+    //           required: true
+    //         },
+    //         {
+    //           type: 4,
+    //           name: "amount",
+    //           description: "The amount of cois you want to sell",
+    //           required: true
+    //         }
+    //       ]
+    //     },
+    //     {
+    //       type: 1,
+    //       name: "limit",
+    //       description: "Sell to the price you want",
+    //       options: [
+    //         {
+    //           type: 3,
+    //           name: "private_key",
+    //           description: "Your private key",
+    //           required: true
+    //         },
+    //         {
+    //           type: 4,
+    //           name: "amount",
+    //           description: "The amount of cois you want to sell",
+    //           required: true
+    //         },
+    //         {
+    //           type: 4,
+    //           name: "price",
+    //           description: "The price you want to sell a coin",
+    //           required: true
+    //         }
+    //       ]
+    //     }
+    //   ]
     // },
     // {
     //   id: '857343135485788181',
@@ -229,7 +275,27 @@ const commands = [
     //   description: 'Make a transaction',
     //   version: '857368002756476969',
     //   default_permission: false,
-    //   guild_id: '856606969485066240'
+    //   guild_id: '856606969485066240',
+    //   options : [
+    //     {
+    //       type: 3,
+    //       name: "private_key",
+    //       description: "Your private key",
+    //       required: true
+    //     },
+    //     {
+    //       type: 3,
+    //       name: "to_address",
+    //       description: "The public key where you want to send the coins",
+    //       required: true
+    //     },
+    //     {
+    //       type: 4,
+    //       name: "amount",
+    //       description: "The amout of coins you want to send",
+    //       required: true
+    //     }
+    //   ]
     // },
     // {
     //   id: '857362543176581150',
@@ -249,104 +315,125 @@ const commands = [
     //   default_permission: false,
     //   guild_id: '856606969485066240'
     // }
+    // {
+    //   name: 'select_role',
+    //   id: "857700923451244545",
+    //   description: "Add a reaction to message to enable role adding",   
+    //   default_permission: false,
+    //   options: [
+    //     {
+    //       type: 1,
+    //       name: 'button',
+    //       description: 'Buy a coin to market price',
+    //       options: [
+    //         {
+    //           type: 3,
+    //           name: 'message_id',
+    //           description: 'The id of the message you want to add a button',
+    //           required: true
+    //         },
+    //         {
+    //           type: 8,
+    //           name: 'role',
+    //           description: 'The id of the role you want to add',
+    //           required: true
+    //         },
+    //         {
+    //           type: 3,
+    //           name: 'type',
+    //           description: 'The type of butto you want to add',
+    //           required: true,
+    //           choices: [
+    //             {
+    //               name: "blue",
+    //               value: "PRIMARY"
+    //             },
+    //             {
+    //               name: "grey",
+    //               value: "SECONDARY"
+    //             },
+    //             {
+    //               name: "green",
+    //               value: "SUCCESS"
+    //             },
+    //             {
+    //               name: "red",
+    //               value: "DANGER"
+    //             },
+    //             {
+    //               name: "link",
+    //               value: "LINK"
+    //             }
+    //           ],
+    //         },
+    //         {
+    //           type: 3,
+    //           name: "label",
+    //           description: "The label of the button",
+    //           required: true
+    //         },
+    //         {
+    //           type: 3,
+    //           name: 'emoji_id',
+    //           description: 'The id of the emoji you want to add',
+    //           required: false
+    //         },
+    //         {
+    //           type: 3,
+    //           name: 'url',
+    //           description: 'The url you want to redirect',
+    //           required: false
+    //         },
+    //       ]
+    //     },
+    //     {
+    //       type: 1,
+    //       name: 'reaction',
+    //       description: 'Buy a coin with the price you want',
+    //       options: [
+    //         {
+    //           type: 3,
+    //           name: 'message_id',
+    //           description: 'The id of the message you want to add a button',
+    //           required: true
+    //         },
+    //         {
+    //           type: 8,
+    //           name: 'role',
+    //           description: 'The id of the role you want to add',
+    //           required: true
+    //         },
+    //         {
+    //           type: 3,
+    //           name: 'emoji_id',
+    //           description: 'The id of the emoji you want to add',
+    //           required: true
+    //         }
+    //       ]
+    //     }
+    //   ]
+    // },
     {
-      name: 'select_role',
-      id: "857700923451244545",
-      description: "Add a reaction to message to enable role adding",   
-      default_permission: false,
-      options: [
-        {
-          type: 1,
-          name: 'button',
-          description: 'Buy a coin to market price',
-          options: [
-            {
-              type: 3,
-              name: 'message_id',
-              description: 'The id of the message you want to add a button',
-              required: true
-            },
-            {
-              type: 8,
-              name: 'role',
-              description: 'The id of the role you want to add',
-              required: true
-            },
-            {
-              type: 3,
-              name: 'type',
-              description: 'The type of butto you want to add',
-              required: true,
-              choices: [
-                {
-                  name: "blue",
-                  value: "PRIMARY"
-                },
-                {
-                  name: "grey",
-                  value: "SECONDARY"
-                },
-                {
-                  name: "green",
-                  value: "SUCCESS"
-                },
-                {
-                  name: "red",
-                  value: "DANGER"
-                },
-                {
-                  name: "link",
-                  value: "LINK"
-                }
-              ],
-            },
-            {
-              type: 3,
-              name: "label",
-              description: "The label of the button",
-              required: true
-            },
-            {
-              type: 3,
-              name: 'emoji_id',
-              description: 'The id of the emoji you want to add',
-              required: false
-            },
-            {
-              type: 3,
-              name: 'url',
-              description: 'The url you want to redirect',
-              required: false
-            },
-          ]
-        },
-        {
-          type: 1,
-          name: 'reaction',
-          description: 'Buy a coin with the price you want',
-          options: [
-            {
-              type: 3,
-              name: 'message_id',
-              description: 'The id of the message you want to add a button',
-              required: true
-            },
-            {
-              type: 8,
-              name: 'role',
-              description: 'The id of the role you want to add',
-              required: true
-            },
-            {
-              type: 3,
-              name: 'emoji_id',
-              description: 'The id of the emoji you want to add',
-              required: true
-            }
-          ]
-        }
-      ]
-    },
+        id: '858766201873629195',
+        application_id: '856608083953582151',
+        name: 'rules',
+        description: 'Send the rules with a button',
+        version: '858766201873629196',
+        default_permission: false,
+        guild_id: '856606969485066240',
+        permissions: [
+            { id: '381748591963799553', type: 2, permission: true },
+            { id: '769993431828660224', type: 2, permission: true }
+        ],
+        options: [
+          {
+            type: 8,
+            name: 'role',
+            description: 'The role you want to give',
+            required: true
+          }
+        ]
+      }
   ]
 
 // getCommands();
@@ -363,6 +450,8 @@ const commands = [
 //     if(i === commands.length - 1) clearInterval(interval);
 // }, 5000)
 
-editCommands(commands[0])
+// editCommands(commands[0])
 
-// setPerms(commands[0]);
+setPerms(commands[0].id);
+
+// setCommand(commands[0])

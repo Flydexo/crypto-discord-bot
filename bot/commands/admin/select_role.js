@@ -7,12 +7,11 @@ const path = require("path");
 
 module.exports.run = (client, interaction) => {
     if(interaction.options.first().name == "button") return client.commands.get("select_role_button").run(client, interaction);
-    return client.guilds.cache.get(guild).channels.cache.get(interaction.channel_id).messages.fetch(interaction.data.options[0].options[0].value).then(async message => {
-        const role = client.guilds.cache.get(guild).roles.cache.get(interaction.data.options[0].options[1].value);
-        if(!role) return "Role invalid";
-        let emoji = client.guilds.cache.get(guild).emojis.cache.get(interaction.data.options[0].options[2].value);
-        if(!emoji && interaction.data.options[0].options[2].value.match(/\p{Emoji_Presentation}/gu) != null){
-            emoji = interaction.data.options[0].options[2].value.match(/\p{Emoji_Presentation}/gu)[0];
+    return client.guilds.cache.get(guild).channels.cache.get(interaction.channel_id).messages.fetch(interaction.options.first().options.get("message_id").value).then(async message => {
+        const role = client.guilds.cache.get(guild).roles.cache.get(interaction.options.first().options.get("role").value);
+        let emoji = client.guilds.cache.get(guild).emojis.cache.get(interaction.options.first().options.get("emoji_id").value);
+        if(!emoji && interaction.options.first().options.get("emoji_id").value.match(/\p{Emoji_Presentation}/gu) != null){
+            emoji = interaction.options.first().options.get("emoji_id").value.match(/\p{Emoji_Presentation}/gu)[0];
             const reactions = JSON.parse(fs.readFileSync(path.join(__dirname, "../../data/reactions.json")));
             for(r of reactions){
                 if(r.message == message.id && r.emoji == emoji){

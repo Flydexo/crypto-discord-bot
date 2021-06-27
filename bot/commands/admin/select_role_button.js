@@ -10,7 +10,10 @@ module.exports.run = (client, interaction) => {
     client.guilds.cache.get(guild).channels.cache.get(interaction.channelID).messages.fetch(interaction.options.get("button").options.get("message_id").value).then(async message => {
         const role = interaction.options.get("button").options.get("role").role;
         console.log(interaction.options.get("button").options);
-        if(!role) interaction.reply("Role invalid");
+        if(!role) interaction.reply({
+            ephemeral: true,
+            content: "Role invalid"
+        });
 
         const button = new MessageButton()
             .setLabel(interaction.options.get("button").options.get("label").value)

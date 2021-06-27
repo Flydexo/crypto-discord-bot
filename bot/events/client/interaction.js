@@ -1,4 +1,6 @@
-const { guild } = require("../../config");
+const createUser = require('../../functions/createUser');
+const generateKeys = require("../../../blockchain/keyGenerator");
+const { guild, holder } = require('../../config');
 
 module.exports = async (client, interaction) => {
     if(interaction.isCommand()){
@@ -13,8 +15,20 @@ module.exports = async (client, interaction) => {
                 content: "Role added"
             })
             interaction.member.roles.add(interaction.customID.split("_")[3])
+        }else if(interaction.customID == "wallet"){
+            const keys = generateKeys();
+            createUser(interaction.member.user, keys.public);
+            client.wallets.set(interaction.member.user.id, {ekp: keys.public, doll: 100});
+            client.guilds.cache.get(guild).members.cache.get(interaction.member.user.id).roles.add(holder);
+            interaction.reply({
+                content: `This is your private key (do not share it) ||${keys.private}|| and your public key \`${keys.public}\``,
+                ephemeral: true
+            });
         }
     }else{
-        interaction.reply("Error");
+        interaction.reply({
+            ephemeral: true,
+            content: "Error"
+        });
     }
 }

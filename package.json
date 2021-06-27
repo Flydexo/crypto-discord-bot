@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "bot": "nodemon start ./bot/index.js",
-    "crypto": "node ./blockchain/index.js"
+    "bot": "node ./bot/index.js",
+    "crypto": "node ./blockchain/index.js",
+    "commands": "node ./bot/functions/slashCommands.js"
   },
   "keywords": [],
   "author": "",

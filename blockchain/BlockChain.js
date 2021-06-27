@@ -3,6 +3,7 @@ const Transaction = require('./Transaction');
 const fs = require("fs");
 const path = require('path');
 const Contract = require("./Contract");
+const { constants } = require('buffer');
 
 class Blockchain{
     constructor(){
@@ -19,7 +20,7 @@ class Blockchain{
     }
 
     createGenesisBlock(){
-        return new Block([new Transaction(null, "049a859c2697b8cfe7af3b19d6c7b11e0b1a641048c3b4ab8bc1183750da35dfbb82da50c12f5e193ae2ac21b4101fcaf8c6e44b297e27f1363c831c00f7cde2ca", 1000000)], Date.now(), "0");
+        return new Block([new Transaction(null, "04cc0fa0177730c519ac0e51a61b8762b1ae786d66fa966c479c36dd934ac872bce237e119d670d60a9185879ab40019d5cbe554c5bb3524821de80df7d643d7f7", 1000000)], Date.now(), "0");
     }
 
     getLastBlock(){
@@ -99,18 +100,25 @@ class Blockchain{
 
     isChainValid(){
         for(let i = 1; i < this.chain.length; i++){
-            const currentBlock = this.chain[i];
+            const currentBlockFile = this.chain[i];
             const previousBlock = this.chain[i - 1];
+            const currentBlock = new Block(currentBlockFile.transactions, currentBlockFile.timestamp, currentBlockFile.previousHash, null, currentBlockFile.nonce);
+            currentBlock.transactions.forEach((t, index) => {
+                currentBlock.transactions[index] = new Transaction(t.from, t.to, t.amount, t.signature)
+            })
 
-            if(currentBlock.previousHash != previousBlock.hash){
+            if(currentBlockFile.previousHash != previousBlock.hash){
+                console.log("prevHash");
                 return false;
             }
 
-            if(currentBlock.hash != currentBlock.createHash()){
+            if(currentBlockFile.hash != currentBlock.createHash()){
+                console.log("hash");
                 return false;
             }
 
             if(!currentBlock.hasValidTransactions()){
+                console.log("transactions");
                 return false;
             }
         }

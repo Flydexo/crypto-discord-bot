@@ -9,6 +9,7 @@ module.exports = (client, message) => {
         if(process.env.messageCount == message.guild.memberCount * memberMultiplier){
             process.env.messageCount = 0;
             EKIP.minePendingTransaction(client.wallets.random().ekp, client);
+            if(!EKIP.isChainValid()) throw "Chain INVALID !!!!!!!!!!"
         }
     }
     if(!message.content.startsWith(prefix)) return;
