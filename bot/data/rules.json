@@ -1,0 +1,72 @@
+{
+    "color": "#FEE75C",
+    "title": "__**RULES**__",
+    "description": "The DISCOINER server rules",
+    "author": "DISCOINER",
+    "rules": [
+        {
+            "name": "Rule #1",
+            "value": "Treat everyone with respect. Absolutely no harassment, witch hunting, sexism, racism, or hate speech will be tolerated."
+        }, 
+        {
+            "name": "Rule #2",
+            "value": "No spam, do not include special characters in your username and you must have a correct profile picture, don't annoy VCs"
+        }, 
+        {
+            "name": "Rule #3",
+            "value": "No NSFW or obscene content. This includes text, images, or links featuring nudity, sex, hard violence, or other graphically disturbing content."
+        }, 
+        {
+            "name": "Rule #4",
+            "value": "No spam, do not include special characters in your username and you must have a correct profile picture, don't annoy VCs"
+        }, 
+        {
+            "name": "Rule #5",
+            "value": "If you see something against the rules or something that makes you feel unsafe, let staff know. We want this server to be a welcoming space!"
+        }, 
+        {
+            "name": "Rule #6",
+            "value": "No investment advice is allowed and in private message too"
+        }, 
+        {
+            "name": "Rule #7",
+            "value": "Don't ask for investment advices"
+        }, 
+        {
+            "name": "Rule #8",
+            "value": "Double accounts are prohibed"
+        }, 
+        {
+            "name": "Rule #9",
+            "value": "DM advertising is prohibed and you will be banned if you do so"
+        }, 
+        {
+            "name": "Rule #10",
+            "value": "Do not abuse of the bot"
+        }, 
+        {
+            "name": "Rule #11",
+            "value": "Respect Discord guidelines https://discord.com/guidelines and Discord terms https://discord.com/terms"
+        }, 
+        {
+            "name": "Rule #12",
+            "value": "No self promotion except in the channels made for that"
+        }, 
+        {
+            "name": "Rule #13",
+            "value": "Do not try to bypass the automoderation"
+        }, 
+        {
+            "name": "Rule #14",
+            "value": "Talk in the correct channel corresponding to your topic"
+        }, 
+        {
+            "name": "Rule #15",
+            "value": "Do not impede staff work and tasks by trolling or providing fake proofs"
+        }, 
+        {
+            "name": "Rule #16",
+            "value": "Do not practice impersonation of other members or people do not share or ask for personal information"
+        }
+    ]
+}
