@@ -68,4 +68,10 @@ module.exports.commands = {
         dm: false,
         wait: false
     },
+    introduce: {
+        name: "introduce",
+        visible: false,
+        dm: false,
+        wait: false
+    }
 }

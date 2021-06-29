@@ -31,7 +31,7 @@ const getCommands = () => {
     })
     .then(res => res.json())
     .then(json => {
-      console.log(json[json.length - 1].options[0].options)
+      console.log(json)
 
     });
 }
@@ -77,33 +77,28 @@ const setPerms = (command) => {
         body: JSON.stringify({
             permissions: [
                 {
-                    id: "381748591963799553",
-                    type: 2,
+                    id: "859540136043741194",
+                    type: 1,
                     permission: true
-                },
-                {
-                  id: "769993431828660224",
-                  type: 2,
-                  permission: true
                 }
             ]
         })
     }).then(res => res.json())
     .then(json => {
         console.log(json)
-        console.log(json.errors._errors)
+        console.log(json.errors.permissions["0"].permission._errors)
     })
 }
 
 const commands = [
     // {
-    //   id: '857319079026491402',
-    //   application_id: '856608083953582151',
+    //   id: '859541210371719168',
+    //   application_id: '859540761099763734',
     //   name: 'public',
-    //   description: "Get the public address of the mentionned member",
-    //   version: '857368002730393670',
+    //   description: 'Get the public address of the mentionned member',
+    //   version: '859556927482888192',
     //   default_permission: false,
-    //   guild_id: '856606969485066240',
+    //   guild_id: '858088196797366282',
     //   options: [
     //     {
     //       type: 6,
@@ -114,13 +109,13 @@ const commands = [
     // ]
     // },
     // {
-    //   id: '857335720242315324',
-    //   application_id: '856608083953582151',
+    //   id: '859556948328448010',
+    //   application_id: '859540761099763734',
     //   name: 'buy',
-    //   description: "Add a buy order to the order book",   
-    //   version: '857368002487648277',
+    //   description: 'Add a buy order to the order book',
+    //   version: '859556948328448011',
     //   default_permission: false,
-    //   guild_id: '856606969485066240',
+    //   guild_id: '858088196797366282',
     //   options: [
     //     {
     //       type: 1,
@@ -157,31 +152,31 @@ const commands = [
     //   ]
     // },
     // {
-    //   id: '857338669958823966',
-    //   application_id: '856608083953582151',
+    //   id: '859556969286991901',
+    //   application_id: '859540761099763734',
     //   name: 'orders',
-    //   description: "Get the order book",
-    //   version: '857338669958823967',
+    //   description: 'Get the order book',
+    //   version: '859556969286991902',
     //   default_permission: false,
-    //   guild_id: '856606969485066240'
+    //   guild_id: '858088196797366282'
     // },
     // {
-    //   id: '857338918701891607',
-    //   application_id: '856608083953582151',
+    //   id: '859556990359175209',
+    //   application_id: '859540761099763734',
     //   name: 'exchange',
-    //   description: "Get the basic interface to trade with EKP",
-    //   version: '857338918701891608',
+    //   description: 'Get the basic interface to trade with EKP',
+    //   version: '859556990359175210',
     //   default_permission: false,
-    //   guild_id: '856606969485066240'
+    //   guild_id: '858088196797366282'
     // },
     // {
-    //   id: '857340460763054080',
-    //   application_id: '856608083953582151',
+    //   id: '859557011427426324',
+    //   application_id: '859540761099763734',
     //   name: 'chart',
     //   description: "Get the EKP's price's chart",
-    //   version: '857368002764996608',
+    //   version: '859557011427426325',
     //   default_permission: false,
-    //   guild_id: '856606969485066240',
+    //   guild_id: '858088196797366282',
     //   options: [
     //     {
     //       type: 3,
@@ -214,13 +209,13 @@ const commands = [
     //   ]
     // },
     // {
-    //   id: '857342635277418536',
-    //   application_id: '856608083953582151',
+    //   id: '859557032415068200',
+    //   application_id: '859540761099763734',
     //   name: 'sell',
-    //   description: "Add a sell order to the order book",
-    //   version: '857342635277418537',
+    //   description: 'Add a sell order to the order book',
+    //   version: '859557032415068201',
     //   default_permission: false,
-    //   guild_id: '856606969485066240',
+    //   guild_id: '858088196797366282',
     //   options: [
     //     {
     //       type: 1,
@@ -269,13 +264,13 @@ const commands = [
     //   ]
     // },
     // {
-    //   id: '857343135485788181',
-    //   application_id: '856608083953582151',
+    //   id: '859557053496033310',
+    //   application_id: '859540761099763734',
     //   name: 'transaction',
     //   description: 'Make a transaction',
-    //   version: '857368002756476969',
+    //   version: '859557053496033311',
     //   default_permission: false,
-    //   guild_id: '856606969485066240',
+    //   guild_id: '858088196797366282',
     //   options : [
     //     {
     //       type: 3,
@@ -298,28 +293,31 @@ const commands = [
     //   ]
     // },
     // {
-    //   id: '857362543176581150',
-    //   application_id: '856608083953582151',
+    //   id: '859557074282217483',
+    //   application_id: '859540761099763734',
     //   name: 'new_wallet',
     //   description: 'Create an EKP wallet',
-    //   version: '857362543176581151',
+    //   version: '859557074282217484',
     //   default_permission: true,
-    //   guild_id: '856606969485066240'
+    //   guild_id: '858088196797366282'
     // },
     // {
-    //   id: '857362707782696989',
-    //   application_id: '856608083953582151',
+    //   id: '859557095085834271',
+    //   application_id: '859540761099763734',
     //   name: 'balance',
     //   description: 'Get your dollar and EKP balance',
-    //   version: '857368002776924170',
+    //   version: '859557095085834272',
     //   default_permission: false,
-    //   guild_id: '856606969485066240'
-    // }
+    //   guild_id: '858088196797366282'
+    // },
     // {
+    //   id: '859557116444672020',
+    //   application_id: '859540761099763734',
     //   name: 'select_role',
-    //   id: "857700923451244545",
-    //   description: "Add a reaction to message to enable role adding",   
+    //   description: 'Add a reaction to message to enable role adding',
+    //   version: '859557116444672021',
     //   default_permission: false,
+    //   guild_id: '858088196797366282',
     //   options: [
     //     {
     //       type: 1,
@@ -413,23 +411,40 @@ const commands = [
     //     }
     //   ]
     // },
+    // {
+    //     id: '859557137406492722',
+    //         application_id: '859540761099763734',
+    //         name: 'rules',
+    //         description: 'Send the rules with a button',
+    //         version: '859557137406492723',
+    //         default_permission: false,
+    //         guild_id: '858088196797366282',
+    //     permissions: [
+    //         { id: '381748591963799553', type: 2, permission: true },
+    //         { id: '769993431828660224', type: 2, permission: true }
+    //     ],
+    //     options: [
+    //       {
+    //         type: 8,
+    //         name: 'role',
+    //         description: 'The role you want to give',
+    //         required: true
+    //       }
+    //     ]
+    //   },
     {
-        id: '858766201873629195',
-        application_id: '856608083953582151',
-        name: 'rules',
-        description: 'Send the rules with a button',
-        version: '858766201873629196',
+        id: '859560315761983528',
+        application_id: '859540761099763734',
+        name: 'introduce',
+        description: 'Introduce yourself with all the members. BE CAREFUL YOU CAN ONLY DO IT ONE TIME',
+        version: '859560315761983529',
         default_permission: false,
-        guild_id: '856606969485066240',
-        permissions: [
-            { id: '381748591963799553', type: 2, permission: true },
-            { id: '769993431828660224', type: 2, permission: true }
-        ],
+        guild_id: '858088196797366282',
         options: [
           {
-            type: 8,
-            name: 'role',
-            description: 'The role you want to give',
+            type: 3,
+            name: 'message',
+            description: 'Your presentation message',
             required: true
           }
         ]
@@ -437,21 +452,26 @@ const commands = [
   ]
 
 // getCommands();
-// commands.forEach(c => {
-//     setTimeout(() => {
-//         editCommands(c)
-//     }, 5000)
-// })
-// let i = 0;
+
+
+// setCommand(c)
+
+// setCommand(commands[0])
+
+// deleteCommand(commands[0].id)
+let i = 0;
 // editCommands(commands[commands.length-1]);
-// let interval = setInterval(() => {
-//     editCommands(commands[i]);
-//     i++;
-//     if(i === commands.length - 1) clearInterval(interval);
-// }, 5000)
+// setPerms(commands[commands.length - 1].id)
+// setCommand(commands[commands.length - 1])
+let interval = setInterval(() => {
+    // setCommand(commands[i]);
+    setPerms(commands[i].id)
+    i++;
+    if(i === commands.length) clearInterval(interval);
+}, 5000)
 
 // editCommands(commands[0])
 
-setPerms(commands[0].id);
+// setPerms(commands[0].id);
 
 // setCommand(commands[0])

@@ -7,7 +7,7 @@ const path = require("path");
 
 module.exports.run = (client, interaction) => {
     if(interaction.options.first().name == "button") return client.commands.get("select_role_button").run(client, interaction);
-    return client.guilds.cache.get(guild).channels.cache.get(interaction.channel_id).messages.fetch(interaction.options.first().options.get("message_id").value).then(async message => {
+    client.guilds.cache.get(guild).channels.cache.get(interaction.channelID).messages.fetch(interaction.options.first().options.get("message_id").value).then(async message => {
         const role = client.guilds.cache.get(guild).roles.cache.get(interaction.options.first().options.get("role").value);
         let emoji = client.guilds.cache.get(guild).emojis.cache.get(interaction.options.first().options.get("emoji_id").value);
         if(!emoji && interaction.options.first().options.get("emoji_id").value.match(/\p{Emoji_Presentation}/gu) != null){
@@ -16,11 +16,17 @@ module.exports.run = (client, interaction) => {
             for(r of reactions){
                 if(r.message == message.id && r.emoji == emoji){
                     console.log("emoji")
-                    return "emoji already added to this message";
+                    return interaction.reply({
+                        ephemeral: true,
+                        content: "emoji already added to this message"
+                    });
                 }
                 else if(r.message == message.id && r.role == role.id){
                     console.log("role");
-                    return "role already added to this message";
+                    return interaction.reply({
+                        ephemeral: true,
+                        content: "role already added to this message"
+                    });
                 }
             }
             await message.react(emoji);
@@ -28,23 +34,35 @@ module.exports.run = (client, interaction) => {
                 message: message.id,
                 role: role.id,
                 emoji: emoji,
-                channel: client.guilds.cache.get(guild).channels.cache.get(interaction.channel_id).id
+                channel: client.guilds.cache.get(guild).channels.cache.get(interaction.channelID).id
             })
             fs.writeFileSync(path.join(__dirname, "../../data/reactions.json"), JSON.stringify(reactions, null, 2), err => {
                 if(err) console.log(err);
             })
-            return `Reaction added`;
+            return interaction.reply({
+                ephemeral: true,
+                content: `Reaction added`
+            });
         }else{
-            if(!emoji) return "invalid emoji";
+            if(!emoji) return interaction.reply({
+                ephemeral: true,
+                content: `Invalid emoji`
+            });;
             const reactions = JSON.parse(fs.readFileSync(path.join(__dirname, "../../data/reactions.json")));
             for(r of reactions){
                 if(r.message == message.id && r.emoji == emoji){
                     console.log("emoji")
-                    return "emoji already added to this message";
+                    return interaction.reply({
+                        ephemeral: true,
+                        content: "emoji already added to this message"
+                    });
                 }
                 else if(r.message == message.id && r.role == role.id){
                     console.log("role");
-                    return "role already added to this message";
+                    return interaction.reply({
+                        ephemeral: true,
+                        content: "role already added to this message"
+                    });
                 }
             }
             await message.react(emoji);
@@ -52,12 +70,15 @@ module.exports.run = (client, interaction) => {
                 message: message.id,
                 role: role.id,
                 emoji: emoji.toString(),
-                channel: client.guilds.cache.get(guild).channels.cache.get(interaction.channel_id).id
+                channel: client.guilds.cache.get(guild).channels.cache.get(interaction.channelID).id
             })
             fs.writeFileSync(path.join(__dirname, "../../data/reactions.json"), JSON.stringify(reactions, null, 2), err => {
                 if(err) console.log(err);
             })
-            return "Reaction added";
+            return interaction.reply({
+                ephemeral: true,
+                content: "Reaction added"
+            });
         }
     });
 }

@@ -41,7 +41,7 @@ const initWallets = (client) => {
     client.wallets = new Collection();
     if(data.length > 0){
         data.forEach(u => {
-            client.wallets.set(u.id, {ekp: u.address, doll: u.dWallet});
+            client.wallets.set(u.id, {ekp: u.address, doll: u.dWallet, messages: u.messages});
         })
     }
 }

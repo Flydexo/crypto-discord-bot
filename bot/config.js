@@ -1,19 +1,21 @@
-module.exports.TOKEN = "ODU2NjA4MDgzOTUzNTgyMTUx.YNDgcg.nFFFS4D8xfYR1SgiF0cKCPiEBoA";
+module.exports.TOKEN = "ODU5NTQwNzYxMDk5NzYzNzM0.YNuLtg._aC8bKzCRlIFKN5FdyyMcV4puWE";
 module.exports.memberMultiplier = 1;
-module.exports.messageLength = 2;
+module.exports.messageLength = 20;
 module.exports.channels = {
-    talk: "856640041476030484",
-    block: "856607806822809631",
-    order: "856607828299218984",
-    exchange: "856607836771057715",
-    logs: "856607757800701972",
-    boostAd: "859451986831474728"
+    talk: "858088196797366285",
+    block: "859538377153314816",
+    order: "859538442315890698",
+    welcome: "858458811336491048",
+    boostAd: "858702104860688444",
+    boost: "858338903404838922"
 };
-module.exports.guild = "856606969485066240";
-module.exports.APP = "856608083953582151";
-module.exports.holder = "857361017033719889";
+module.exports.guild = "858088196797366282";
+module.exports.APP = "859540761099763734";
+module.exports.holder = "858459988266582050";
 module.exports.prefix = "EKP!";
 module.exports.boostMessage = "859448460024872970";
 module.exports.roles = {
-    booster: "857892921797246986"
+    boosterFirst: "859540136043741194",
+    boosterMention: "858702273777500170",
+    booster: "858449821525868554"
 }

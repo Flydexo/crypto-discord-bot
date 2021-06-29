@@ -4,7 +4,8 @@ const createUser = (user, address) => {
     const userObj = {
         id: user.id,
         address: address,
-        dWallet: 100
+        dWallet: 100,
+        messages: 0
     };
     const data = JSON.parse(fs.readFileSync(path.join(__dirname, '../data/users.json')));
     data.push(userObj);
