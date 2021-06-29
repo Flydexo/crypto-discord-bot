@@ -6,9 +6,14 @@ module.exports.channels = {
     block: "856607806822809631",
     order: "856607828299218984",
     exchange: "856607836771057715",
-    logs: "856607757800701972"
+    logs: "856607757800701972",
+    boostAd: "859451986831474728"
 };
 module.exports.guild = "856606969485066240";
 module.exports.APP = "856608083953582151";
 module.exports.holder = "857361017033719889";
 module.exports.prefix = "EKP!";
+module.exports.boostMessage = "859448460024872970";
+module.exports.roles = {
+    booster: "857892921797246986"
+}

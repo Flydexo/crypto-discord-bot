@@ -1,8 +1,12 @@
 const {EKIP} = require("../../index");
-const {memberMultiplier, messageLength, prefix} = require('../../config');
+const {memberMultiplier, messageLength, prefix, guild, boostMessage, channels, roles} = require('../../config');
 
 module.exports = (client, message) => {
+    // if(message.content == "!emit") client.commands.get("emit").run(client, message);
     if(message.author.bot) return;
+    if(message.channel.id == channels.boostAd){
+        return message.reply(`${message.guild.roles.cache.get(roles.booster)}`);
+    }
     if(message.channel.type == "dm") return client.emit('dm', message);
     if(message.content.length >= messageLength){
         process.env.messageCount++;
