@@ -2,6 +2,7 @@ const { MessageEmbed } = require("discord.js");
 const { guild, channels } = require("../../config")
 
 module.exports = (client, blockchain, currency, block) => {
+    console.log(block);
     const embed = new MessageEmbed();
     embed.setColor("#EB459E");
     embed.setDescription(`New block created on EKIP blockchain !`);
@@ -11,15 +12,15 @@ module.exports = (client, blockchain, currency, block) => {
     embed.addFields([
         {
             name: "Nonce",
-            value: block.nonce
+            value: block.nonce.toString()
         },
         {
             name: "Transactions",
-            value: block.transactions.length
+            value: block.transactions.length.toString()
         },
         {
             name: "Timestamp",
-            value: block.timestamp
+            value: block.timestamp.toString()
         },
         {
             name: "Hash",
@@ -30,5 +31,7 @@ module.exports = (client, blockchain, currency, block) => {
             value: block.previousHash
         }
     ]);
-    client.guilds.cache.get(guild).channels.cache.get(channels.block).send(embed);
+    client.guilds.cache.get(guild).channels.cache.get(channels.block).send({
+        embeds: [embed],
+    });
 }

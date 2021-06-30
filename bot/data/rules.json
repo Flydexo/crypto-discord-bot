@@ -42,7 +42,7 @@
         }, 
         {
             "name": "Rule #10",
-            "value": "Do not abuse of the bot"
+            "value": "Do not abuse of the bot and do not try to bypass the automoderation "
         }, 
         {
             "name": "Rule #11",
@@ -54,7 +54,7 @@
         }, 
         {
             "name": "Rule #13",
-            "value": "Do not try to bypass the automoderation"
+            "value": "Only send videos, images and audios in the media channel"
         }, 
         {
             "name": "Rule #14",
