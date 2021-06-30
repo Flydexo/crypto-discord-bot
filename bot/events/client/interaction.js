@@ -1,6 +1,6 @@
 const createUser = require('../../functions/createUser');
 const generateKeys = require("../../../blockchain/keyGenerator");
-const { guild, holder } = require('../../config');
+const { guild, holder, hellos } = require('../../config');
 
 module.exports = async (client, interaction) => {
     if(interaction.isCommand()){
@@ -24,6 +24,11 @@ module.exports = async (client, interaction) => {
                 content: `This is your private key (do not share it) ||${keys.private}|| and your public key \`${keys.public}\``,
                 ephemeral: true
             });
+        }else if(interaction.customID.startsWith("hi_")){
+            interaction.reply({
+                content: `${interaction.member} says hello to ${interaction.customID.substring(3, interaction.customID.length)}`,
+                files: [hellos[Math.round(Math.random()*hellos.length)]]
+            })
         }
     }else{
         interaction.reply({

@@ -19,3 +19,10 @@ module.exports.roles = {
     boosterMention: "858702273777500170",
     booster: "858449821525868554"
 }
+module.exports.hellos = [
+    "https://cdn.discordapp.com/attachments/858702978889678878/859715422051237928/tenor.gif",
+    "https://cdn.discordapp.com/attachments/858702978889678878/859715420801073162/tenor_3.gif",
+    "https://cdn.discordapp.com/attachments/858702978889678878/859715416460492830/tenor_2.gif",
+    "https://cdn.discordapp.com/attachments/858702978889678878/859715417252560906/tenor_1.gif",
+    "https://cdn.discordapp.com/attachments/858702978889678878/859715415167729664/giphy.gif"
+]
