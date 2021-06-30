@@ -14,7 +14,7 @@ module.exports = (client, message) => {
             if(client.messages.has(message.author.id)){
                 const nb = client.messages.get(message.author.id) + 1
                 client.messages.set(message.author.id, nb);
-                if(client.messages.get(message.author.id) >= 3){
+                if(client.messages.get(message.author.id) >= 30){
                     updateUserMessages(client, message.author.id, 30);
                     client.messages.set(message.author.id, 0);
                 }  

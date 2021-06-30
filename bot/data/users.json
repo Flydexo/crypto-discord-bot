@@ -1,13 +1,7 @@
 [
   {
     "id": "381748591963799553",
-    "address": "04050757037afa824eb132ed50c640b18e199b9778cee0035f1b4d00f38b89456aa29434b5dd6cf10672411471c2afc789d7b55af0cf059208c834d54b4b5dcf5f",
-    "dWallet": 100,
-    "messages": 30
-  },
-  {
-    "id": "381748591963799553",
-    "address": "041a5ef77dd026e051543beb0534a01c57ccb101ddc49391cce1df2ae87258d94ebfde2481fd3f730f9bf6c3deb0682b7493f07036fbbfd6ed3239d4bb209a07e0",
+    "address": "046fb7fbf3c41bd735b11cf69e870c18217edd15e5a2ed1fa1de30f4d54502b7d2e067e1ab1f77eca3b90bfd35af386d6e2fa0121453dcbbcab467a4d6c86e599b",
     "dWallet": 100,
     "messages": 0
   }
