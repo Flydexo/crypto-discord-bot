@@ -1,4 +1,4 @@
-module.exports.TOKEN = "ODU5NTQwNzYxMDk5NzYzNzM0.YNuLtg._aC8bKzCRlIFKN5FdyyMcV4puWE";
+module.exports.TOKEN = "TOKEN";
 module.exports.memberMultiplier = 1;
 module.exports.messageLength = 20;
 module.exports.channels = {
